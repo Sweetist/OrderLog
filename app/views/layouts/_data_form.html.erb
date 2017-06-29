@@ -1,18 +1,35 @@
 <%= form_for(@table) do |f| %>
 <%= render 'layouts/error_messages', object: f.object %>
   
+
   <% @headers.each do |key, val| %>
-  	<%= val.name %>
-  	<% if val.type == :string || val.type == :integer %>
-  	  <%= f.text_field val.name %>
+    <div class="form-group">
+    <label><%= val.name %></label>
+  	
+    <% if !@datum.nil? %>
+
+    <% if val.type == :string || val.type == :integer %>
+  	  <%= f.text_field val.name, :value => @datum[val.name] %>
   	<% elsif val.type == :date %>
-  	  <%= f.date_field val.name %>
+  	  <%= f.date_field val.name, :value => @datum[val.name].to_s %>
   	<% elsif val.type == :time %>
-  	  <%= f.time_field val.name %>
+  	  <%= f.time_field val.name, :value => @datum[val.name].to_s(:time) %>
   	<% end %>
-  	<br>
+  	
+    <% else %>
+
+    <% if val.type == :string || val.type == :integer || val.type == :float %>
+      <%= f.text_field val.name %>
+    <% elsif val.type == :date %>
+      <%= f.date_field val.name %>
+    <% elsif val.type == :time %>
+      <%= f.time_field val.name %>
+    <% end %>
+
+    <% end %>
+
+    </div>
   <% end %>
 
-  <%= f.submit "Add" %>
-
+  <%= f.submit "Update", class: "btn btn-large btn-primary" %>
 <% end %>

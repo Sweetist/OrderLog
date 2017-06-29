@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
+  devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   get 'deliveries', to: 'deliveries#index'  
   delete 'deliveries', to: 'deliveries#destroy'
+
   get 'orders', to: 'orders#index'
-  delete 'deliveries', to: 'deliveries#destroy'
-  get 'recipients', to: 'recipients#index'
-  delete 'deliveries', to: 'deliveries#destroy'
+  delete 'orders', to: 'orders#destroy'
+
   get 'bakeries', to: 'bakeries#index'
-  delete 'deliveries', to: 'deliveries#destroy'
+  delete 'bakeries', to: 'bakeries#destroy'
 
+  get 'recipients', to: 'recipients#index'
+  delete 'recipients', to: 'recipients#destroy'
+  
   resources :deliveries
-
+  resources :bakeries
+  resources :orders
+  resources :recipients
 end
