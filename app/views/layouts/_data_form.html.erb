@@ -14,6 +14,8 @@
   	  <%= f.date_field val.name, :value => @datum[val.name].to_s %>
   	<% elsif val.type == :time %>
   	  <%= f.time_field val.name, :value => @datum[val.name].to_s(:time) %>
+    <% elsif val.type == :boolean%>  
+      <%= f.check_box val.name, :value => @datum[val.name]%>
   	<% end %>
   	
     <% else %>
@@ -24,6 +26,8 @@
       <%= f.date_field val.name %>
     <% elsif val.type == :time %>
       <%= f.time_field val.name %>
+    <% elsif val.type == :boolean %>  
+      <%= f.check_box val.name %>
     <% end %>
 
     <% end %>

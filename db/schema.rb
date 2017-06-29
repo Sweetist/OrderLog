@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 20170629194909) do
 
   create_table "bakeries", force: :cascade do |t|
     t.string "name"
-    t.string "type"
+    t.string "bakery_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -30,10 +30,14 @@ ActiveRecord::Schema.define(version: 20170629194909) do
     t.time "dropoff_time"
     t.boolean "is_on_time"
     t.string "courier_service"
-    t.float "courer_fee"
+    t.float "courier_fee"
     t.string "notes"
+    t.integer "bakery_id"
+    t.integer "recipient_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["bakery_id"], name: "index_deliveries_on_bakery_id"
+    t.index ["recipient_id"], name: "index_deliveries_on_recipient_id"
   end
 
   create_table "orders", force: :cascade do |t|

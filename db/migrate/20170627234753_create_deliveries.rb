@@ -11,12 +11,12 @@ class CreateDeliveries < ActiveRecord::Migration[5.1]
       t.time :dropoff_time
       t.boolean :is_on_time
       t.string :courier_service
-      t.float :courer_fee
-      
+      t.float :courier_fee
+
       t.string :notes
       
-      #t.reference :bakery_id
-      #t.reference :recipient_id
+      t.references :bakery, foreign_key: true
+      t.references :recipient, foreign_key: true
       
       t.timestamps
     end
