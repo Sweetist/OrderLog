@@ -1,0 +1,21 @@
+<table style="border: 1px solid black">
+  <tr>
+    <% @headers.each do |key, val| %>
+      <th>
+        <%= val.name %>
+      </th> 
+    <% end %>
+  </tr>
+  <% if @data.any? %>
+    <% @data.each do |datum| %>
+      <tr>
+      <% datum.attributes.each do |key,val| %>
+        <td><%= val %> </td>
+      <% end %>
+      <td><%= link_to "edit" %></td>
+      <td><%= link_to "delete", datum, method: :delete %><%= datum %></td>
+      <td> </td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
