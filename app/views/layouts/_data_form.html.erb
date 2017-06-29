@@ -1,17 +1,18 @@
 <%= form_for(@table) do |f| %>
-<%= render 'layouts/error_messages', object: f.object %>
-  
+<%= render 'layouts/error_messages', object: f.object %>  
 
   <% @headers.each do |key, val| %>
-    <div class="form-group">
+    <div class="form-group row">
     <label><%= val.name %></label>
   	
     <% if !@datum.nil? %>
 
-    <% if val.type == :string || val.type == :integer %>
+    <% if val.name == "id" %>
+      <%= f.text_field val.name, :value => @datum[val.name], :disabled => true %>
+    <% elsif val.type == :string || val.type == :integer %>
   	  <%= f.text_field val.name, :value => @datum[val.name] %>
   	<% elsif val.type == :date %>
-  	  <%= f.date_field val.name, :value => @datum[val.name].to_s %>
+  	  <%= f.date_field val.name, :value => datum_value(@datum, val.name) %>
   	<% elsif val.type == :time %>
   	  <%= f.time_field val.name, :value => @datum[val.name].to_s(:time) %>
     <% elsif val.type == :boolean%>  
