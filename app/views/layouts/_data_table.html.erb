@@ -17,7 +17,7 @@
         <% if key == "bakery_id" %>
           <%= link_to val, bakery_path(val) unless val.nil?%> 
         <% elsif key == "recipient_id" %>
-          <%= link_to val, recipient_path(val) unless val.nil?%>        
+          <%= link_to val, recipient_path(val) unless val.nil?%>
         <% else %>
           <%= val %>
         <% end %>
