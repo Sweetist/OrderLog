@@ -5,33 +5,18 @@
     <div class="form-group row">
     <label><%= val.name %></label>
   	
-    <% if !@datum.nil? %>
 
     <% if val.name == "id" %>
-      <%= f.text_field val.name, :value => @datum[val.name], :disabled => true %>
-    <% elsif val.type == :string || val.type == :integer %>
-  	  <%= f.text_field val.name, :value => @datum[val.name] %>
+      <%= f.text_field val.name, :value => datum_value(@datum, val), :readonly => true %>
+    <% elsif val.type == :string || val.type == :integer || val.type == :float%>
+  	  <%= f.text_field val.name, :value => datum_value(@datum, val) %>
   	<% elsif val.type == :date %>
-  	  <%= f.date_field val.name, :value => datum_value(@datum, val.name) %>
+  	  <%= f.date_field val.name, :value => datum_value(@datum, val) %>
   	<% elsif val.type == :time %>
-  	  <%= f.time_field val.name, :value => @datum[val.name].to_s(:time) %>
+  	  <%= f.time_field val.name, :value => datum_value(@datum, val) %>
     <% elsif val.type == :boolean%>  
-      <%= f.check_box val.name, :value => @datum[val.name]%>
+      <%= f.check_box val.name, :value => datum_value(@datum, val)%>
   	<% end %>
-  	
-    <% else %>
-
-    <% if val.type == :string || val.type == :integer || val.type == :float %>
-      <%= f.text_field val.name %>
-    <% elsif val.type == :date %>
-      <%= f.date_field val.name %>
-    <% elsif val.type == :time %>
-      <%= f.time_field val.name %>
-    <% elsif val.type == :boolean %>  
-      <%= f.check_box val.name %>
-    <% end %>
-
-    <% end %>
 
     </div>
   <% end %>

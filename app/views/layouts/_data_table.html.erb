@@ -1,3 +1,4 @@
+
 <table class="table table-bordered">
   <thead>
   <tr>
@@ -15,7 +16,7 @@
       <% datum.attributes.each do |key,val| %>
         <td>
         <% if key == "bakery_id" %>
-          <%= link_to val, bakery_path(val) unless val.nil?%> 
+          <%= link_to val, bakery_path(val) unless val.nil? %> 
         <% elsif key == "recipient_id" %>
           <%= link_to val, recipient_path(val) unless val.nil?%>
         <% else %>
