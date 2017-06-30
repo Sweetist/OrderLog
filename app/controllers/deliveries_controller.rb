@@ -21,7 +21,6 @@ class DeliveriesController < ApplicationController
   end
 
   private
-
     def load_table
       @headers = Delivery.columns_hash
       @data = Delivery.all
