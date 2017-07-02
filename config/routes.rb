@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root 'deliveries#index'
+  root 'unified#index'
 
   get 'deliveries', to: 'deliveries#index'  
   delete 'deliveries', to: 'deliveries#destroy'
@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get 'recipients', to: 'recipients#index'
   delete 'recipients', to: 'recipients#destroy'
   
+  get 'unified', to: 'unified#index'
+
   resources :deliveries
   resources :bakeries
   resources :orders

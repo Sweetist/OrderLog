@@ -1,4 +1,3 @@
 <title>Orders</title>
-
-<%= render 'layouts/data_form' %>
-<%= render 'layouts/data_table' %>
+<%= render 'layouts/data_form', table: @table, headers: @headers, datum: @datum %>
+<%= render 'layouts/data_table', data: @data, headers: @headers %>

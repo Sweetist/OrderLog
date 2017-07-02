@@ -34,9 +34,11 @@ ActiveRecord::Schema.define(version: 20170629194909) do
     t.string "notes"
     t.integer "bakery_id"
     t.integer "recipient_id"
+    t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["bakery_id"], name: "index_deliveries_on_bakery_id"
+    t.index ["order_id"], name: "index_deliveries_on_order_id"
     t.index ["recipient_id"], name: "index_deliveries_on_recipient_id"
   end
 

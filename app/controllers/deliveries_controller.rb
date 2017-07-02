@@ -34,5 +34,4 @@ class DeliveriesController < ApplicationController
     def load_delivery
       @datum = Delivery.find_by(id: params[:id])
     end
-
 end

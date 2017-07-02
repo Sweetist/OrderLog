@@ -1,5 +1,5 @@
 class Recipient < ApplicationRecord
 
-  has_many :recipients, dependent: :nullify
+  has_many :deliveries, dependent: :nullify
 
 end

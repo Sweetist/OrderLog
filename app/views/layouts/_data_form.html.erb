@@ -1,20 +1,20 @@
-<%= form_for(@table) do |f| %>
+<%= form_for(table) do |f| %>
 <%= render 'layouts/error_messages', object: f.object %>  
 
-  <% @headers.each do |key, val| %>
+  <% headers.each do |key, val| %>
     <div class="form-group row">
     <label><%= val.name %></label>
   	
     <% if val.name == "id" %>
-      <%= f.text_field val.name, :value => datum_value(@datum, val), :readonly => true %>
+      <%= f.text_field val.name, :value => datum_value(datum, val), :readonly => true %>
     <% elsif val.type == :string || val.type == :integer || val.type == :float%>
-  	  <%= f.text_field val.name, :value => datum_value(@datum, val) %>
+  	  <%= f.text_field val.name, :value => datum_value(datum, val) %>
   	<% elsif val.type == :date %>
-  	  <%= f.date_field val.name, :value => datum_value(@datum, val) %>
+  	  <%= f.date_field val.name, :value => datum_value(datum, val) %>
   	<% elsif val.type == :time %>
-  	  <%= f.time_field val.name, :value => datum_value(@datum, val) %>
+  	  <%= f.time_field val.name, :value => datum_value(datum, val) %>
     <% elsif val.type == :boolean%>  
-      <%= f.check_box val.name, :value => datum_value(@datum, val)%>
+      <%= f.check_box val.name, :value => datum_value(datum, val)%>
   	<% end %>
 
     </div>
@@ -22,3 +22,4 @@
 
   <%= f.submit "Update", class: "btn btn-large btn-primary" %>
 <% end %>
+<%= link_to "Clear", {:controller => controller_name, :action => "index"}, class: "btn btn-large btn-primary" %>

@@ -1,0 +1,24 @@
+
+<% datum.attributes.each do |key,val|%>
+
+  <% if datum == @datum %>
+  <td style="background-color:#FFA">
+  <% else %>
+  <td>
+  <% end %>
+    
+    <% if val.nil? %>
+    <% elsif key == "bakery_id"%>
+      <%= link_to val, bakery_path(val) %>
+    <% elsif key == "recipient_id" %>
+      <%= link_to val, recipient_path(val) %>
+    <% elsif key == "delivery_id" %>
+      <%= link_to val, delivery_path(val) %>
+    <% elsif key == "order_id" %>
+      <%= link_to val, order_path(val) %>
+    <% else %>
+      <%= val %>
+    <% end %>
+  </td>
+
+<% end %>
