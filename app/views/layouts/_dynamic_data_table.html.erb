@@ -1,4 +1,4 @@
-<div id="show-col"></div>
+<div id="show-col"><h3>Hidden Tags</h3></div>
 <table class="table table-bordered">
   <thead>
     <tr>
@@ -19,7 +19,7 @@
     <% data.each do |datum| %>
     <tr class="<%= datum.id %>">
       
-      <td><a class="toggle-row">Hide/Show</a></td>
+      <td><a class="toggle-row">Show/Hide</a></td>
 
       <%= render 'layouts/data_row', datum: datum %> 
       <%= render 'layouts/data_row', datum: datum.order || @null_order %>
