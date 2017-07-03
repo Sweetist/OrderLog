@@ -28,7 +28,7 @@ class DeliveriesController < ApplicationController
         format.js
       end
 
-      if request.referer == deliveries_url
+      if request.referer == deliveries_url || request.referer == unified_url
         redirect_to deliveries_url
       end
 
