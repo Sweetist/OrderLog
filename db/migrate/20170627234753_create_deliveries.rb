@@ -15,10 +15,6 @@ class CreateDeliveries < ActiveRecord::Migration[5.1]
 
       t.string :notes
       
-      t.references :bakery, foreign_key: true
-      t.references :recipient, foreign_key: true
-      t.references :order, foreign_key: true
-      
       t.timestamps
     end
   end
