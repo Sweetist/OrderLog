@@ -21,7 +21,6 @@ class OrdersController < ApplicationController
       @datum = Order.find_or_initialize_by(id: params[:order][:id])
       @datum.update_attributes(order_params)
       @datum.save
-      redirect_to orders_url
 
       respond_to do |format|
         format.js

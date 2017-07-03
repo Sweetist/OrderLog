@@ -23,7 +23,6 @@ class RecipientsController < ApplicationController
       @datum.update_attributes(recipient_params)
       @datum.save
 
-
       respond_to do |format|
         format.js
       end
