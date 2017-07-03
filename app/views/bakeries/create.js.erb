@@ -1,2 +1,5 @@
-$("#bakery_id").val("<%= @datum.id %>");
+<% @datum.each do |k,v| %>
+console.log(k);
+console.log(v);
+<% end %>
 $("#delivery_bakery_id").val("<%= @datum.id %>");
