@@ -5,9 +5,10 @@ class UnifiedController < ApplicationController
   def index
   end
 
-  def find
-    render 'index'
+  def create
+    redirect_to url_for(:controller => "bakeries", :action => "create") and return
   end
+
 
   private
     def load_table

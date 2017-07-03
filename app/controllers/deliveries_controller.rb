@@ -8,12 +8,30 @@ class DeliveriesController < ApplicationController
 
   def create
     if params[:find]
-      @datum= Bakery.find_by(name: params[:delivery][:name])
+      @datum= Delivery.find_by(name: params[:delivery][:name])
+
+      respond_to do |format|
+        format.js
+      end
+
+      if request.referer == deliveries_url
+        redirect_to delivery_path(@datum.id)
+      end
+
     else
       @datum = Delivery.find_or_initialize_by(id: params[:delivery][:id])
       @datum.update_attributes(delivery_params)
       @datum.save
-      redirect_to deliveries_url
+
+
+      respond_to do |format|
+        format.js
+      end
+
+      if request.referer == deliveries_url
+        redirect_to deliveries_url
+      end
+
     end
   end
 

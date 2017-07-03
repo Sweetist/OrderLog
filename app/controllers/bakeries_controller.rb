@@ -9,12 +9,29 @@ class BakeriesController < ApplicationController
   def create
     if params[:find]
       @datum= Bakery.find_by(name: params[:bakery][:name])
+
+      respond_to do |format|
+        format.js
+      end
+
+      if request.referer == bakeries_url
+        redirect_to bakery_path(@datum.id)
+      end
+
     else
       @datum = Bakery.find_or_initialize_by(id: params[:bakery][:id])
       @datum.update_attributes(bakery_params)
       @datum.save
-      redirect_to bakeries_url
+
+      respond_to do |format|
+        format.js
+      end
+
+      if request.referer == bakeries_url
+        redirect_to bakeries_url
+      end
     end
+
   end
 
   def destroy

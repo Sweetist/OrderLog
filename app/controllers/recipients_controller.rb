@@ -9,11 +9,29 @@ class RecipientsController < ApplicationController
   def create
     if params[:find]
       @datum= Recipient.find_by(name: params[:recipient][:name])
+
+      respond_to do |format|
+        format.js
+      end
+
+      if request.referer == recipients_url
+        redirect_to recipient_path(@datum.id)
+      end
+
     else
       @datum = Recipient.find_or_initialize_by(id: params[:recipient][:id])
       @datum.update_attributes(recipient_params)
       @datum.save
-      redirect_to recipients_url
+
+
+      respond_to do |format|
+        format.js
+      end
+
+      if request.referer == recipients_url
+        redirect_to recipients_url
+      end
+
     end
   end
 

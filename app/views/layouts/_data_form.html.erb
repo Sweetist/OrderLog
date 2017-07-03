@@ -1,5 +1,5 @@
-<%= form_for(table, :html => {class: "form-horizontal"}) do |f| %>
-<%= render 'layouts/error_messages', object: f.object %>  
+<%= form_for(table, :html => {class: "form-horizontal"}, remote: true) do |f|  %>
+  <%= render 'layouts/error_messages', object: f.object %>  
   <% headers.each do |key, val| %>
 
   <%= render 'layouts/form_field', f: f, key: key, val: val, datum: datum %>
