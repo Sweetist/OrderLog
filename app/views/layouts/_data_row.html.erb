@@ -1,4 +1,4 @@
-
+<% if !datum.nil? %>
 <% datum.attributes.each do |key,val|%>
 
   <% if datum == @datum %>
@@ -20,5 +20,5 @@
       <%= val %>
     <% end %>
   </td>
-
+<% end %>
 <% end %>

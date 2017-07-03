@@ -7,13 +7,19 @@ class DeliveriesController < ApplicationController
   end
 
   def create
-    @datum = Delivery.find_or_initialize_by(id: params[:delivery][:id])
-    @datum.update_attributes(delivery_params)
-    @datum.save
+    if params[:find]
+      @datum= Bakery.find_by(name: params[:delivery][:name])
+    else
+      @datum = Delivery.find_or_initialize_by(id: params[:delivery][:id])
+      @datum.update_attributes(delivery_params)
+      @datum.save
+      redirect_to deliveries_url
+    end
   end
 
   def destroy
     @datum.destroy
+    redirect_to deliveries_url
   end
 
   def show

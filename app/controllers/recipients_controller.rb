@@ -7,13 +7,19 @@ class RecipientsController < ApplicationController
   end
 
   def create
-    @datum = Recipient.find_or_initialize_by(id: params[:recipient][:id])
-    @datum.update_attributes(recipient_params)
-    @datum.save
+    if params[:find]
+      @datum= Recipient.find_by(name: params[:recipient][:name])
+    else
+      @datum = Recipient.find_or_initialize_by(id: params[:recipient][:id])
+      @datum.update_attributes(recipient_params)
+      @datum.save
+      redirect_to recipients_url
+    end
   end
 
   def destroy
     @datum.destroy
+    redirect_to recipients_url
   end
 
   def show

@@ -5,15 +5,29 @@ class UnifiedController < ApplicationController
   def index
   end
 
+  def find
+    render 'index'
+  end
+
   private
     def load_table
+      data_classes = [Delivery, Order, Bakery, Recipient]
+      
       @headers = []
-      @headers[0]=Delivery.columns_hash
-      @headers[1]=Order.columns_hash
-      @headers[2]=Bakery.columns_hash
-      @headers[3]=Recipient.columns_hash
-      @data = Delivery.all
-      @table = Delivery.new
-    end
+      data_classes.each do |table|
+        @headers.push(table.columns_hash)
+      end
 
+      @null_data = []
+      data_classes.each do |table|
+        @null_data.push(table.new)
+      end
+      
+      @data = Delivery.all
+
+      @null_delivery = Delivery.new
+      @null_order = Order.new
+      @null_bakery = Bakery.new
+      @null_recipient = Recipient.new
+    end
 end

@@ -1,24 +1,35 @@
+<div id="show-col"></div>
 <table class="table table-bordered">
   <thead>
-  <tr>
-    <% headers.each do |header| %>
-    <% header.each do |key, val| %>
-      <th>
-        <%= val.name %>
+    <tr>
+      <th></th>
+      <% headers.each do |header| %>
+      <% header.each do |key, val| %>
+      <th class="toggle-col">
+        <a>
+          <%= val.name %>
+        </a>
       </th> 
-    <% end %>
-    <% end %>
-  </tr>
+      <% end %>
+      <% end %>
+    </tr>
   </thead>
   <tbody>
-  <% if data.any? %>
+    <% if data.any? %>
     <% data.each do |datum| %>
-      <tr class="<%= datum.id %>">
-      <%= render 'layouts/data_row', datum: datum, top_level: true%> 
+    <tr class="<%= datum.id %>">
+      
+      <td><a class="toggle-row">Hide/Show</a></td>
+
+      <%= render 'layouts/data_row', datum: datum %> 
+      <%= render 'layouts/data_row', datum: datum.order || @null_order %>
+      <%= render 'layouts/data_row', datum: datum.bakery || @null_bakery %>
+      <%= render 'layouts/data_row', datum: datum.recipient || @null_recipient %>
+
       <td><%= link_to "edit", datum, method: :get %></td>
       <td><%= link_to "delete", datum, method: :delete %></td>
-      </tr>
+    </tr>
     <% end %>
-  <% end %>
+    <% end %>
   </tbody>
 </table>

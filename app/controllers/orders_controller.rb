@@ -6,14 +6,19 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @datum = Order.find_or_initialize_by(id: params[:order][:id])
-    @datum.update_attributes(order_params)
-    @datum.save
-
+    if params[:find]
+      @datum= Order.find_by(name: params[:order][:name])
+    else
+      @datum = Order.find_or_initialize_by(id: params[:order][:id])
+      @datum.update_attributes(order_params)
+      @datum.save
+      redirect_to orders_url
+    end
   end
 
   def destroy
     @datum.destroy
+    redirect_to orders_url
   end
 
   def show

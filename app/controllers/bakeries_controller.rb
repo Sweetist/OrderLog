@@ -7,13 +7,19 @@ class BakeriesController < ApplicationController
   end
 
   def create
-    @datum = Bakery.find_or_initialize_by(id: params[:bakery][:id])
-    @datum.update_attributes(bakery_params)
-    @datum.save
+    if params[:find]
+      @datum= Bakery.find_by(name: params[:bakery][:name])
+    else
+      @datum = Bakery.find_or_initialize_by(id: params[:bakery][:id])
+      @datum.update_attributes(bakery_params)
+      @datum.save
+      redirect_to bakeries_url
+    end
   end
 
   def destroy
     @datum.destroy
+    redirect_to bakeries_url
   end
 
   def show

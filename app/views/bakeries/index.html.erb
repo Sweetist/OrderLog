@@ -1,3 +1,6 @@
 <title>Bakeries</title>
+<% if !@stuff.nil? %>
+<%= @stuff.id %>
+<% end %>
 <%= render 'layouts/data_form', table: @table, headers: @headers, datum: @datum %>
 <%= render 'layouts/data_table', data: @data, headers: @headers %>
