@@ -1,9 +1,16 @@
 class RecipientsController < ApplicationController
 
-  before_action :load_table, only: [:index, :show]
+  before_action :load_table, only: [:new, :index, :show, :edit]
   before_action :load_recipient, only: [:edit, :create, :show, :destroy]
 
+  def new
+  end
+
   def index
+  end
+  
+  def edit
+    render 'new'
   end
 
   def create
@@ -46,9 +53,11 @@ class RecipientsController < ApplicationController
   private
 
     def load_table
-      @headers = Recipient.columns_hash
+      #@headers = Recipient.columns_hash
+      @headers = [Recipient.columns_hash]
       @data = Recipient.all
       @table = Recipient.new
+      @visible = Recipient.column_names
     end
 
     def recipient_params

@@ -1,9 +1,16 @@
 class DeliveriesController < ApplicationController
 
-  before_action :load_table, only: [:index, :show]
+  before_action :load_table, only: [:new, :index, :show, :edit]
   before_action :load_delivery, only: [:edit, :create, :show, :destroy]
 
+  def new
+  end
+
   def index
+  end
+
+  def edit
+    render 'new'
   end
 
   def create
@@ -46,9 +53,13 @@ class DeliveriesController < ApplicationController
 
   private
     def load_table
-      @headers = Delivery.columns_hash
+      #@headers = Delivery.columns_hash
+      @headers = [Delivery.columns_hash]
+      @headers[0].delete("pickup_time")
+      @headers[0].delete("dropoff_time")
       @data = Delivery.all
       @table = Delivery.new
+      @visible = ["delivery_number", "order_number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "is_on_time"]
     end
 
     def delivery_params

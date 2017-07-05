@@ -8,15 +8,19 @@ Rails.application.routes.draw do
 
   get 'deliveries', to: 'deliveries#index'  
   delete 'deliveries', to: 'deliveries#destroy'
+  get 'deliveries/edit', to: 'deliveries#edit'
 
   get 'orders', to: 'orders#index'
   delete 'orders', to: 'orders#destroy'
+  get 'orders/edit', to: 'orders#edit'
 
   get 'bakeries', to: 'bakeries#index'
   delete 'bakeries', to: 'bakeries#destroy'
+  get 'bakeries/edit', to: 'bakeries#edit'
 
   get 'recipients', to: 'recipients#index'
   delete 'recipients', to: 'recipients#destroy'
+  get 'recipients/edit', to: 'recipients#edit'
   
   get 'unified', to: 'unified#index'
 

@@ -1,8 +1,15 @@
 class OrdersController < ApplicationController
-  before_action :load_table, only: [:index, :show]
-  before_action :load_order, only: [:edit, :create, :show, :destroy]
+  before_action :load_table, only: [:new, :index, :show, :edit]
+  before_action :load_order, only: [:edit, :create, :show, :destroy, :edit]
+
+  def new
+  end
 
   def index
+  end
+
+  def edit
+    render 'new'
   end
 
   def create
@@ -44,9 +51,11 @@ class OrdersController < ApplicationController
   private
 
     def load_table
-      @headers = Order.columns_hash
+      #@headers = Order.columns_hash
+      @headers = [Order.columns_hash]
       @data = Order.all
       @table = Order.new
+      @visible = Order.column_names
     end
 
     def order_params

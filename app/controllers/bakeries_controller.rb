@@ -1,7 +1,14 @@
-class BakeriesController < ApplicationController
+ class BakeriesController < ApplicationController
 
-  before_action :load_table, only: [:index, :show]
-  before_action :load_bakery, only: [:edit, :create, :show, :destroy]
+  before_action :load_table, only: [:new, :edit, :index, :show]
+  before_action :load_bakery, only: [:edit, :create, :show, :destroy, :edit]
+
+  def new
+  end
+
+  def edit
+    render 'new'
+  end
 
   def index
   end
@@ -46,9 +53,11 @@ class BakeriesController < ApplicationController
   private
 
     def load_table
-      @headers = Bakery.columns_hash
+      #@headers = Bakery.columns_hash
+      @headers = [Bakery.columns_hash]
       @data = Bakery.all
       @table = Bakery.new
+      @visible = Bakery.column_names
     end
 
     def bakery_params

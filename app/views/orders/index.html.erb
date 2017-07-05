@@ -1,3 +1,7 @@
 <title>Orders</title>
-<%= render 'layouts/data_form', table: @table, headers: @headers, datum: @datum %>
-<%= render 'layouts/data_table', data: @data, headers: @headers %>
+
+<%= link_to "Add", {controller: controller_name, action: "new"}, class: "btn btn-large btn-primary" %> 
+<button class="btn btn-large btn-primary" id="toggle-form"> Embedded Form </button>
+
+<%= render 'layouts/data_form', table: @table, headers: @headers[0], datum: @datum, form_display: "hidden-form" %>
+<%= render 'layouts/dynamic_data_table', data: @data, headers: @headers %>

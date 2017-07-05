@@ -9,14 +9,19 @@ class UnifiedController < ApplicationController
     redirect_to url_for(:controller => "bakeries", :action => "create") and return
   end
 
+  def edit
+    render 'new'
+  end
 
   private
     def load_table
       data_classes = [Delivery, Order, Bakery, Recipient]
       
       @headers = []
+      @visible = []
       data_classes.each do |table|
         @headers.push(table.columns_hash)
+        @visible.concat(table.column_names)
       end
 
       @null_data = []
@@ -31,4 +36,5 @@ class UnifiedController < ApplicationController
       @null_bakery = Bakery.new
       @null_recipient = Recipient.new
     end
+    
 end
