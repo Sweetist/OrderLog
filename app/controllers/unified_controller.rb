@@ -6,11 +6,11 @@ class UnifiedController < ApplicationController
   end
 
   def create
-    redirect_to url_for(:controller => "bakeries", :action => "create") and return
+    redirect_to url_for(:controller => "deliveries", :action => "create") and return
   end
 
   def edit
-    render 'new'
+    redirect_to url_for(:controller => "deliveries", :action => "edit") and return
   end
 
   private
@@ -35,6 +35,8 @@ class UnifiedController < ApplicationController
       @null_order = Order.new
       @null_bakery = Bakery.new
       @null_recipient = Recipient.new
+
+      @viewable_fields = ["name", "order_number"]
     end
     
 end

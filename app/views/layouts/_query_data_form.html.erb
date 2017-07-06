@@ -1,0 +1,19 @@
+<%= form_for(table, :html => {class: "form-horizontal #{form_display}", id: "table"}, remote: true) do |a|  %>
+ <h3><%= table.class.name %> Information</h3>
+
+  <%= render 'layouts/error_messages', object: a.object %>  
+  <a class="toggle-hidden-field">Toggle Fields</a>
+  <% headers.each do |key, val| %>
+  	<% if val.name == "id" || val.name.in?(@viewable_fields) %>
+  		<%= render 'layouts/form_field', f: a, key: key, val: val, datum: datum %>
+  	<% else %>
+  	  <div class="hidden-field"> 
+ 		<%= render 'layouts/form_field', f: a, key: key, val: val, datum: datum %>
+  	  </div>
+  	<% end %>
+  <% end %>
+
+  <%= a.submit "Create New", name: "update", class: "btn btn-large btn-primary" %>
+  <%= a.submit "Find in Database", name: "find", class: "btn btn-large btn-primary" %>
+  <%= link_to "Clear", {controller: controller_name, action: "index"}, class: "btn btn-large btn-primary" %>
+<% end %>

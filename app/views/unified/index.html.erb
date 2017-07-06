@@ -1,6 +1,9 @@
 <title>Overall</title>
-<%= render 'layouts/data_form', table: @null_order, headers: @headers[1], datum: @datum, form_display: "hidden-form" %>
-<%= render 'layouts/data_form', table: @null_bakery, headers: @headers[2], datum: @datum, form_display: "hidden-form"  %>
-<%= render 'layouts/data_form', table: @null_recipient, headers: @headers[3], datum: @datum, form_display: "hidden-form"  %>
-<%= render 'layouts/data_form', table: @null_delivery, headers: @headers[0], datum: @datum, form_display: "hidden-form"  %>
+
+<%= render 'layouts/query_data_form', table: @null_bakery, headers: @headers[2], datum: @datum, form_display: nil %>
+<%= render 'layouts/query_data_form', table: @null_recipient, headers: @headers[3], datum: @datum, form_display: nil %>
+<%= render 'layouts/query_data_form', table: @null_order, headers: @headers[1], datum: @datum, form_display: nil %>
+
+<%= render 'layouts/data_form', table: @null_delivery, headers: @headers[0], datum: @datum, form_display: nil, nested: false %>
+
 <%= render 'layouts/dynamic_data_table', data: @data, headers: @headers %>

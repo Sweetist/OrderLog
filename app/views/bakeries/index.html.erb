@@ -3,5 +3,7 @@
 <%= link_to "Add", {controller: controller_name, action: "new"}, class: "btn btn-large btn-primary" %> 
 <button class="btn btn-large btn-primary" id="toggle-form"> Embedded Form </button>
 
+<div class="display-form-group">
 <%= render 'layouts/data_form', table: @table, headers: @headers[0], datum: @datum, form_display: "hidden-form" %>
+</div>
 <%= render 'layouts/dynamic_data_table', data: @data, headers: @headers %>

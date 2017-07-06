@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'unified#index'
   get 'unified', to: 'unified#index'
   post 'unified', to: 'unified#create'
+  get 'unified/edit', to: 'unified#edit'
 
   get 'deliveries', to: 'deliveries#index'  
   delete 'deliveries', to: 'deliveries#destroy'

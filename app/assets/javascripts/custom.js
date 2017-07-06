@@ -1,10 +1,15 @@
-window.onload = function(){
+var ready = function(){
     $(".toggle-row").on("click", toggle_row);
     $(".hide-col").on("click", hide_column);
+    
     $("#toggle-form").on("click", function(){
-        $("form").toggle(500);
+        $(".display-form-group").toggle(500);
     });
-    $(".hidden-col").trigger("click");
+
+    //$(".hidden-col").trigger("click");
+    $(".toggle-hidden-field").on("click", function(){
+        $(this).parent().children(".hidden-field").toggle(250);
+    });
 };
 
 // Toggles hide and show for table rows
@@ -28,3 +33,6 @@ var hide_column = function hide_column(){
     });
     $("#show-col").append($show_element);
 };
+
+//$(document).ready(ready);
+$(document).on('turbolinks:load', ready);

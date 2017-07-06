@@ -14,7 +14,7 @@ class OrdersController < ApplicationController
 
   def create
     if params[:find]
-      @datum= Order.find_by(name: params[:order][:name])
+      @datum= Order.find_by(order_number: params[:order][:order_number])
 
       respond_to do |format|
         format.js
