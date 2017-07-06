@@ -33,6 +33,7 @@ gem 'bootstrap-sass', '~> 3.3.7'
 # gem 'capistrano-rails', group: :development
 gem 'devise'
 gem 'jquery-rails'
+gem 'state_machine'
 
 group :development, :test do
   gem 'sqlite3'

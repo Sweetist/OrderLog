@@ -29,4 +29,13 @@ Rails.application.routes.draw do
   resources :bakeries
   resources :orders
   resources :recipients
+
+  namespace :api, defaults: { format: 'json' } do 
+    devise_for :users
+
+    resources :orders
+    resources :bakeries 
+    resources :recipients 
+    resources :deliveries
+  end
 end
