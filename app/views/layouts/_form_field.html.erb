@@ -7,17 +7,13 @@
     <% elsif val.name == "order_id" || val.name == "recipient_id" || val.name == "bakery_id" %>
       <%= f.hidden_field val.name, :value => datum_value(datum, val), :readonly => true, :class => "form-control" %>
     <% elsif val.type == :string || val.type == :integer || val.type == :float %>
-      <%= f.text_field val.name, :value => datum_value(datum, val), :class => "for m-control" %>
+      <%= f.text_field val.name, :value => datum_value(datum, val), :class => "form-control" %>
     <% elsif val.type == :date %>
       <%= f.date_field val.name, :value => datum_value(datum, val), :class => "form-control" %>
     <% elsif val.type == :time %>
       <%= f.time_field val.name, :value => datum_value(datum, val), :class => "form-control" %>
     <% elsif val.type == :boolean%>  
       <%= f.check_box val.name, :value => datum_value(datum, val) %>
-  <% end %>
-
-  <% if controller_name == "unified" %>
-    
   <% end %>
   </div>    
 </div>
