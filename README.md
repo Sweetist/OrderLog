@@ -22,3 +22,17 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+--- Basic Information Structure ---
+
+Order {
+	bakery: {
+
+	},
+	user: {
+
+	},
+	shipments: [{}]
+	line_items: [{}]
+	recipient: {}
+}

@@ -36,7 +36,6 @@ module Api
     private
 
     def load_table
-      #@headers = Bakery.columns_hash
       @headers = [Bakery.columns_hash]
       @data = Bakery.all
       @table = Bakery.new

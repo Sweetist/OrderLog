@@ -34,6 +34,7 @@ gem 'bootstrap-sass', '~> 3.3.7'
 gem 'devise'
 gem 'jquery-rails'
 gem 'state_machine'
+gem 'devise_token_auth'
 
 group :development, :test do
   gem 'sqlite3'

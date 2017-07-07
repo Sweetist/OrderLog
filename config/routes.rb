@@ -32,7 +32,10 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: 'json' } do 
     devise_for :users
-
+    devise_scope :user do
+      post 'sign_in', to: 'sessions#create'
+    end 
+    
     resources :orders
     resources :bakeries 
     resources :recipients 
