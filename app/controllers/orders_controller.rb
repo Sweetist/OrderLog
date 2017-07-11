@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :load_table, only: [:new, :index, :show, :edit]
-  before_action :load_order, only: [:edit, :create, :show, :destroy, :edit]
+  before_action :load_order, only: [:create, :show, :destroy, :edit]
 
   def new
   end
