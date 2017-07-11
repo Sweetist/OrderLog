@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170703114353) do
+ActiveRecord::Schema.define(version: 20170707214631) do
 
   create_table "bakeries", force: :cascade do |t|
     t.string "name"
@@ -31,15 +31,12 @@ ActiveRecord::Schema.define(version: 20170703114353) do
     t.boolean "is_on_time"
     t.string "courier_service"
     t.float "courier_fee"
+    t.string "status"
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "bakery_id"
-    t.integer "recipient_id"
     t.integer "order_id"
-    t.index ["bakery_id"], name: "index_deliveries_on_bakery_id"
     t.index ["order_id"], name: "index_deliveries_on_order_id"
-    t.index ["recipient_id"], name: "index_deliveries_on_recipient_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -55,6 +52,10 @@ ActiveRecord::Schema.define(version: 20170703114353) do
     t.float "promotions"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "bakery_id"
+    t.integer "recipient_id"
+    t.index ["bakery_id"], name: "index_orders_on_bakery_id"
+    t.index ["recipient_id"], name: "index_orders_on_recipient_id"
   end
 
   create_table "recipients", force: :cascade do |t|
@@ -65,7 +66,8 @@ ActiveRecord::Schema.define(version: 20170703114353) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
+    t.string "provider", default: "email", null: false
+    t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -75,10 +77,23 @@ ActiveRecord::Schema.define(version: 20170703114353) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string "unconfirmed_email"
+    t.string "name"
+    t.string "nickname"
+    t.string "image"
+    t.string "email"
+    t.text "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "authentication_token", limit: 30
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
 end

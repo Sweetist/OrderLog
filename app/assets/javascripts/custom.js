@@ -6,7 +6,7 @@ var ready = function(){
         $(".display-form-group").toggle(500);
     });
 
-    //$(".hidden-col").trigger("click");
+    $(".hidden-col").trigger("click");
     $(".toggle-hidden-field").on("click", function(){
         $(this).parent().children(".hidden-field").toggle(250);
     });

@@ -31,11 +31,11 @@ Rails.application.routes.draw do
   resources :recipients
 
   namespace :api, defaults: { format: 'json' } do 
-    devise_for :users
-    devise_scope :user do
-      post 'sign_in', to: 'sessions#create'
-    end 
-    
+    devise_for :users,  controllers: { sessions: 'sessions' }
+
+    #post 'users/sign_in', to: 'sessions#create'
+    #mount_devise_token_auth_for 'User', at: 'auth'
+
     resources :orders
     resources :bakeries 
     resources :recipients 

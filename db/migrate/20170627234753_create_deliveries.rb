@@ -13,6 +13,8 @@ class CreateDeliveries < ActiveRecord::Migration[5.1]
       t.string :courier_service
       t.float :courier_fee
 
+      t.string :status
+
       t.string :notes
       
       t.timestamps

@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+ # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.2'
 # Use sqlite3 as the database for Active Record
 # Use Puma as the app server
@@ -33,8 +33,10 @@ gem 'bootstrap-sass', '~> 3.3.7'
 # gem 'capistrano-rails', group: :development
 gem 'devise'
 gem 'jquery-rails'
+gem 'simple_token_authentication'
 gem 'state_machine'
 gem 'devise_token_auth'
+gem 'omniauth'
 
 group :development, :test do
   gem 'sqlite3'

@@ -55,6 +55,11 @@ class OrdersController < ApplicationController
       @headers = [Order.columns_hash]
       @data = Order.all
       @table = Order.new
+      @bakery_ids = []
+      bakeries = Bakery.all
+      bakeries.each do |b|
+        @bakery_ids.push("#{b.id} - #{b.name}")
+      end
       @visible = Order.column_names
     end
 
