@@ -4,7 +4,7 @@ module Api
 
     def create
       if params[:find]
-        @datum= Recipient.find_by(name: params[:name])
+        @datum = Recipient.find_by(name: params[:name])
         if request.referer == recipients_url
           redirect_to recipient_path(@datum.id)
         end

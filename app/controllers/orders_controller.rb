@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  
+
   before_action :load_table, only: [:new, :index, :show, :edit]
   before_action :load_order, only: [:create, :show, :destroy, :edit]
 
@@ -52,7 +52,6 @@ class OrdersController < ApplicationController
   private
 
     def load_table
-      #@headers = Order.columns_hash
       @headers = [Order.columns_hash]
       @data = Order.all
       @table = Order.new

@@ -2,7 +2,6 @@ module Api
   class Api::BakeriesController < Api::BaseController
     before_action :load_bakery, only: [:create, :show, :destroy, :update]
     #include DeviseTokenAuth::Concerns::SetUserByToken
-    before_action :authenticate_user
 
 
     def create

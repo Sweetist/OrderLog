@@ -5,12 +5,12 @@ module Api
 
     def create
       if params[:find]
-        @datum= Order.find_by(order_number: params[:order][:order_number])
+        @datum= Order.find_by(order_number: params[:order_number])
         if request.referer == orders_url
           redirect_to order_path(@datum.id)
         end
       else
-        @datum = Order.find_or_initialize_by(id: params[:order][:id])
+        @datum = Order.find_or_initialize_by(id: params[:id])
         @datum.update_attributes(order_params)
         @datum.save
       end
