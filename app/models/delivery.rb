@@ -59,6 +59,6 @@ class Delivery < ApplicationRecord
 	private
 
 	def set_default
-		self.status = :new
+		self.state = :new
 	end
 end
