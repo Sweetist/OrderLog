@@ -5,7 +5,7 @@ class Delivery < ApplicationRecord
 
 	#initial not working -> default value must be manually set
 	after_initialize :set_default
-	state_machine :status, initial: :new do
+	state_machine initial: :new do
 
 		event :assign do
 			transition [:new, :issue_resolved] => :assigned

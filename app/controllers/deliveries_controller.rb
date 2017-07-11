@@ -36,9 +36,9 @@ class DeliveriesController < ApplicationController
       end
 
       
-      #if request.referer == deliveries_url || request.referer == unified_url
-        #redirect_to deliveries_url
-      #end
+      if request.referer == deliveries_url || request.referer == unified_url
+        redirect_to deliveries_url
+      end
     end
   end
 
@@ -53,7 +53,6 @@ class DeliveriesController < ApplicationController
 
   private
     def load_table
-      #@headers = Delivery.columns_hash
       @headers = [Delivery.columns_hash]
       @headers[0].delete("pickup_time")
       @headers[0].delete("dropoff_time")
