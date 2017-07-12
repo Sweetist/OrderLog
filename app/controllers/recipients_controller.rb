@@ -34,10 +34,7 @@ class RecipientsController < ApplicationController
         format.js
       end
 
-      if request.referer == recipients_url
-        redirect_to recipients_url
-      end
-
+      redirect_to recipients_url
     end
   end
 
@@ -52,22 +49,21 @@ class RecipientsController < ApplicationController
 
   private
 
-    def load_table
+  def load_table
     @readonly=[]
     @transitions=[]
-      #@headers = Recipient.columns_hash
-      @headers = [Recipient.columns_hash]
-      @data = Recipient.all
-      @table = Recipient.new
-      @visible = Recipient.column_names
-    end
+    @headers = [Recipient.columns_hash]
+    @data = Recipient.all
+    @table = Recipient.new
+    @visible = Recipient.column_names
+  end
 
-    def recipient_params
-      params.require(:recipient).permit(Recipient.column_names)
-    end
+  def recipient_params
+    params.require(:recipient).permit(Recipient.column_names)
+  end
 
-    def load_recipient
-      @datum = Recipient.find_by(id: params[:id])
-    end
+  def load_recipient
+    @datum = Recipient.find_by(id: params[:id])
+  end
 
 end

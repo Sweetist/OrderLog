@@ -34,9 +34,7 @@
         format.js
       end
 
-      if request.referer == bakeries_url
         redirect_to bakeries_url
-      end
     end
 
   end

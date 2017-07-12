@@ -34,9 +34,8 @@ class OrdersController < ApplicationController
         format.js
       end
 
-      if request.referer == orders_url
-        redirect_to orders_url
-      end
+      redirect_to orders_url
+      
     end
   end
 
@@ -57,11 +56,20 @@ class OrdersController < ApplicationController
       @headers = [Order.columns_hash]
       @data = Order.all
       @table = Order.new
+
       @bakery_ids = []
+      @recipient_ids = []
+
       bakeries = Bakery.all
       bakeries.each do |b|
         @bakery_ids.push("#{b.id} - #{b.name}")
       end
+      
+      recipients = Recipient.all
+      recipients.each do |r|
+        @recipient_ids.push("#{r.id} - #{r.name}")
+      end
+
       @visible = Order.column_names
     end
 
