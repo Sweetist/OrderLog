@@ -54,6 +54,7 @@
 
     def load_table
     @readonly=[]
+    @transitions=[]
       #@headers = Bakery.columns_hash
       @headers = [Bakery.columns_hash]
       @data = Bakery.all

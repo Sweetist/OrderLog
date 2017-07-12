@@ -36,7 +36,7 @@
         <%= render 'layouts/data_row', datum: datum.recipient || @null_recipient %>
 
         <% end %>
-        <td>
+        <td unless @transitions.empty?>
           
           <% @transitions.each do |transition| %>
 
