@@ -23,6 +23,11 @@ class UnifiedController < ApplicationController
         @headers.push(table.columns_hash)
         @visible.concat(table.column_names)
       end
+      @bakery_ids = []
+      bakeries = Bakery.all
+      bakeries.each do |b|
+        @bakery_ids.push("#{b.id} - #{b.name}")
+      end
 
       @null_data = []
       data_classes.each do |table|
