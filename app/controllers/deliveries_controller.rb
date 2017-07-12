@@ -31,7 +31,7 @@ class DeliveriesController < ApplicationController
 
       @datum.save
 
-      #puts @datum.errors.full_messages
+      puts @datum.errors.full_messages
 
       respond_to do |format|
         format.js
