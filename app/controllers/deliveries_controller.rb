@@ -59,6 +59,11 @@ class DeliveriesController < ApplicationController
       @data = Delivery.all
       @table = Delivery.new
       @visible = ["delivery_number", "order_number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "is_on_time"]
+      @bakery_ids = []
+      bakeries = Bakery.all
+      bakeries.each do |b|
+        @bakery_ids.push("#{b.id} - #{b.name}")
+      end
     end
 
     def delivery_params
