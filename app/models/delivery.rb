@@ -2,10 +2,11 @@ class Delivery < ApplicationRecord
 	belongs_to :bakery, optional: true
 	belongs_to :order, optional: true
 	belongs_to :recipient, optional: true
-	attr_accessor :state
 
 	#initial not working -> default value must be manually set
+
 	after_initialize :set_default
+
 	state_machine initial: :new do
 
 		event :assign do
@@ -44,22 +45,22 @@ class Delivery < ApplicationRecord
 			transition  [:new, :assigned, :en_route_to_pickup, :out_for_delivery, :issue_resolved] => :canceled
 		end
 
-	  state :new
-	  state :assigned
-	  state :en_route_to_pickup
-	  state :out_for_delivery
-	  state :delivered
-	  state :feedback_requested
-	  state :complete
-	  state :issue_reported
-	  state :issue_resolved
-	  state :canceled
+		state :new
+		state :assigned
+		state :en_route_to_pickup
+		state :out_for_delivery
+		state :delivered
+		state :feedback_requested
+		state :complete
+		state :issue_reported
+		state :issue_resolved
+		state :canceled
 
 	end
 
 	private
 
 	def set_default
-		self.state = :new
+		self.state ||= :new
 	end
 end

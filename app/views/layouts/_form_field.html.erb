@@ -6,12 +6,15 @@
     <%= f.text_field val.name, :value => datum_value(datum, val), :readonly => true, :class => "form-control" %>
     <% elsif val.name == "delivery_id" || val.name == "order_id" || val.name == "recipient_id" || val.name == "bakery_id" %>
 
-    <% if val.name == "bakery_id" %>
+    <% if true %>
       <%= f.select val.name, @bakery_ids, {class: "form-control"} %> 
     <% else %>
       <%= f.hidden_field val.name, :value => datum_value(datum, val), :readonly => false, :class => "form-control" %>
     <% end %>
-
+    
+    <% elsif @readonly.include?(val.name) %>
+    <%= f.text_field val.name, :value => datum_value(datum, val), :readonly => true, :class => "form-control" %>
+    
     <% elsif val.type == :string || val.type == :integer || val.type == :float %>
     <%= f.text_field val.name, :value => datum_value(datum, val), :class => "form-control" %>
     <% elsif val.type == :date %>

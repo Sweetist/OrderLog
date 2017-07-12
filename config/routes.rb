@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   delete 'deliveries', to: 'deliveries#destroy'
   get 'deliveries/edit', to: 'deliveries#edit'
 
+  post 'deliveries/transition/:id', to: 'deliveries#transition'
+
   get 'orders', to: 'orders#index'
   delete 'orders', to: 'orders#destroy'
   get 'orders/edit', to: 'orders#edit'

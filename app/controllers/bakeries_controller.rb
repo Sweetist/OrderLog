@@ -53,6 +53,7 @@
   private
 
     def load_table
+    @readonly=[]
       #@headers = Bakery.columns_hash
       @headers = [Bakery.columns_hash]
       @data = Bakery.all

@@ -1,7 +1,7 @@
 module Api
   class Api::DeliveriesController < Api::BaseController
 
-    before_action :load_delivery, only: [:create, :show, :destroy, :update]
+    before_action :load_delivery, only: [:create, :show, :destroy, :update, :transition]
 
     def create
       if params[:find]
@@ -23,6 +23,31 @@ module Api
 
     def destroy
       @datum.destroy
+    end
+
+    def transition
+      transition = params[:transition]
+      case transition
+      when "assign"
+        @datum.assign
+      when "begin_delivery"
+        @datum.begin_delivery
+      when "pickup_order"
+        @datum.pickup_order
+      when "deliver" 
+        @datum.deliver
+      when "request_feedback"
+        @datum.request_feedback
+      when "receive_feedback"
+        @datum.receive_feedback
+      when "report_issue"
+        @datum.report_issue
+      when "resolve_issue" 
+        @datum.resolve_issue
+      end
+      puts @datum.state
+      @datum.save
+      redirect_to deliveries_url
     end
 
     def show

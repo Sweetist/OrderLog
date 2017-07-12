@@ -15,6 +15,7 @@ class UnifiedController < ApplicationController
 
   private
     def load_table
+    @readonly=[]
       data_classes = [Delivery, Order, Bakery, Recipient]
       
       @headers = []

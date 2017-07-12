@@ -52,6 +52,7 @@ class OrdersController < ApplicationController
   private
 
     def load_table
+    @readonly=[]
       @headers = [Order.columns_hash]
       @data = Order.all
       @table = Order.new
