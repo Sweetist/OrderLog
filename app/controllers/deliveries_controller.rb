@@ -56,6 +56,7 @@ class DeliveriesController < ApplicationController
       @headers = [Delivery.columns_hash]
       @headers[0].delete("pickup_time")
       @headers[0].delete("dropoff_time")
+      @headers[0].delete("is_on_time")
       @data = Delivery.all
       @table = Delivery.new
       @visible = ["delivery_number", "order_number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "is_on_time"]

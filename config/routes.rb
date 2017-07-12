@@ -2,11 +2,12 @@ Rails.application.routes.draw do
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  root 'unified#index'
-  get 'unified', to: 'unified#index'
-  post 'unified', to: 'unified#create'
-  get 'unified/edit', to: 'unified#edit'
-
+  #root 'unified#index'
+  #get 'unified', to: 'unified#index'
+  #post 'unified', to: 'unified#create'
+  #get 'unified/edit', to: 'unified#edit'
+  root 'deliveries#index'
+  
   get 'deliveries', to: 'deliveries#index'  
   delete 'deliveries', to: 'deliveries#destroy'
   get 'deliveries/edit', to: 'deliveries#edit'
@@ -23,7 +24,7 @@ Rails.application.routes.draw do
   delete 'recipients', to: 'recipients#destroy'
   get 'recipients/edit', to: 'recipients#edit'
   
-  get 'unified', to: 'unified#index'
+  #get 'unified', to: 'unified#index'
 
   resources :deliveries
   resources :bakeries
