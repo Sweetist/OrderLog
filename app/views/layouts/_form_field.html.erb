@@ -7,7 +7,6 @@
     <% elsif val.name == "delivery_id" || val.name == "order_id" || val.name == "recipient_id" || val.name == "bakery_id" %>
 
     <% if val.name == "bakery_id" %>
-      <%= f.select val.name, @bakery_ids, {}, {class: "form-control"} %> 
     <% else %>
       <%= f.hidden_field val.name, :value => datum_value(datum, val), :readonly => false, :class => "form-control" %>
     <% end %>
