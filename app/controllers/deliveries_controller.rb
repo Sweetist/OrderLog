@@ -28,10 +28,10 @@ class DeliveriesController < ApplicationController
     else
       @datum = Delivery.find_or_initialize_by(id: params[:delivery][:id])
       @datum.update_attributes(delivery_params)
-      
+
       @datum.save
 
-      puts @datum.errors.full_messages
+      #puts @datum.errors.full_messages
 
       respond_to do |format|
         format.js
