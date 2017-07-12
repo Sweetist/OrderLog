@@ -36,6 +36,7 @@ gem 'simple_token_authentication'
 gem 'state_machine'
 gem 'devise_token_auth'
 gem 'omniauth'
+gem 'better_errors'
 
 group :development, :test do
   gem 'sqlite3'

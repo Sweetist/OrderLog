@@ -54,6 +54,7 @@ class RecipientsController < ApplicationController
 
     def load_table
     @readonly=[]
+    @transitions=[]
       #@headers = Recipient.columns_hash
       @headers = [Recipient.columns_hash]
       @data = Recipient.all

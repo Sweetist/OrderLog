@@ -1,5 +1,5 @@
 class Bakery < ApplicationRecord
 
-  has_many :deliveries, dependent: :nullify
+  has_many :orders, dependent: :nullify
 
 end

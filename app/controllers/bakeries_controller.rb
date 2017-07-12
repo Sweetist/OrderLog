@@ -1,7 +1,7 @@
  class BakeriesController < ApplicationController
 
   before_action :load_table, only: [:new, :edit, :index, :show]
-  before_action :load_bakery, only: [:edit, :create, :show, :destroy, :edit]
+  before_action :load_bakery, only: [:edit, :create, :show, :destroy]
 
   def new
   end

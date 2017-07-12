@@ -28,7 +28,10 @@ class DeliveriesController < ApplicationController
     else
       @datum = Delivery.find_or_initialize_by(id: params[:delivery][:id])
       @datum.update_attributes(delivery_params)
+      puts @datum
+      puts "---------------------------------"
       @datum.save
+      puts @datum.errors.full_messages
 
 
       respond_to do |format|
@@ -95,7 +98,9 @@ class DeliveriesController < ApplicationController
     end
 
     def delivery_params
-      params.require(:delivery).permit(Delivery.column_names)
+      allowed = Delivery.column_names
+      allowed.delete("state")
+      params.require(:delivery).permit(allowed)
     end
 
     def load_delivery
