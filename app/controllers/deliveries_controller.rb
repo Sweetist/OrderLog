@@ -74,7 +74,6 @@ class DeliveriesController < ApplicationController
     when "resolve_issue" 
       @datum.resolve_issue
     end
-    puts @datum.state
     @datum.save
     redirect_to deliveries_url
   end
