@@ -44,7 +44,8 @@ Rails.application.routes.draw do
   resources :line_items
 
   namespace :api, defaults: { format: 'json' } do 
-    devise_for :users,  controllers: { sessions: 'sessions' }
+
+    devise_for :users,  controllers: { sessions: 'api/sessions' }
 
     #post 'users/sign_in', to: 'sessions#create'
     #mount_devise_token_auth_for 'User', at: 'auth'

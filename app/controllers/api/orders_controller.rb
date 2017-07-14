@@ -26,7 +26,8 @@ module Api
         if (params[:line_items])
           items = params[:line_items]
           items.each do |i|
-            line_item = LineItem.find_or_initialize_by(id: params[:id])
+            puts i
+            line_item = LineItem.find_or_initialize_by(id: i[:id])
             line_item.update_attributes(i.permit(LineItem.column_names))
             line_item.order_id = @datum.id
             line_item.save
@@ -34,6 +35,7 @@ module Api
         end
         @datum.update_attributes(order_params)
         @datum.save
+        @datum.delivery.save
         render json: { message: "order saved"}
       end
     end
