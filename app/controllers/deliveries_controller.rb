@@ -15,30 +15,33 @@ class DeliveriesController < ApplicationController
 
   def create
     if params[:find]
-      @datum= Delivery.find_by(name: params[:delivery][:name])
+      @datum= Delivery.find_by(delivery_number: params[:delivery][:delivery_number])
 
       respond_to do |format|
         format.js
       end
 
       if request.referer == deliveries_url
-        redirect_to delivery_path(@datum.id)
+        #redirect_to delivery_path(@datum.id)
+        redirect_to edit_delivery_path(@datum.id)
       end
 
     else
       @datum = Delivery.find_or_initialize_by(id: params[:delivery][:id])
       @datum.update_attributes(delivery_params)
 
-      @datum.save
 
-      puts @datum.errors.full_messages
+      if @datum.save
+        flash[:notice] = "Successfully updated"
+      else
+        flash[:error] = "Error:" + @datum.errors.full_messages
+      end
 
       respond_to do |format|
         format.js
       end
       
-        redirect_to deliveries_url
-      
+      redirect_to deliveries_url
     end
   end
 
@@ -71,7 +74,11 @@ class DeliveriesController < ApplicationController
     when "resolve_issue" 
       @datum.resolve_issue
     end
-    @datum.save
+    if @datum.save
+      flash[:notice] = "Successfully updated"
+    else
+      flash[:error] = "Error:" + @datum.errors.full_messages
+    end
     redirect_to deliveries_url
   end
 
@@ -85,20 +92,15 @@ class DeliveriesController < ApplicationController
       @data = Delivery.all
 
       @table = Delivery.new
-      @visible = ["delivery_number", "order_number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "order_id", "state"]
-      @bakery_ids = []
-      @recipient_ids = []
+      @visible = ["delivery_number", "number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "order_id", "state"]
+      
       @order_ids = []
 
       orders = Order.all
       orders.each do |o|
-        @order_ids.push("#{o.id} - #{o.order_number}")
+        @order_ids.push("#{o.id} - #{o.number}")
       end
 
-      bakeries = Bakery.all
-      bakeries.each do |b|
-        @bakery_ids.push("#{b.id} - #{b.name}")
-      end
     end
 
     def delivery_params

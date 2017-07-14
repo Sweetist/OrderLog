@@ -15,20 +15,27 @@ class RecipientsController < ApplicationController
 
   def create
     if params[:find]
-      @datum= Recipient.find_by(name: params[:recipient][:name])
+      @datum= Recipient.find_by(first_name: params[:recipient][:first_name], last_name: params[:recipient][:last_name])
 
       respond_to do |format|
         format.js
       end
 
       if request.referer == recipients_url
-        redirect_to recipient_path(@datum.id)
+        #redirect_to recipient_path(@datum.id)
+        redirect_to edit_recipient_path(@datum.id)
       end
 
     else
       @datum = Recipient.find_or_initialize_by(id: params[:recipient][:id])
       @datum.update_attributes(recipient_params)
-      @datum.save
+
+
+      if @datum.save
+        flash[:notice] = "Successfully updated"
+      else
+        flash[:error] = "Error:" + @datum.errors.full_messages
+      end
 
       respond_to do |format|
         format.js

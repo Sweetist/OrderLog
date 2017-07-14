@@ -1,13 +1,14 @@
 <%= form_for(table, :html => {class: "form-horizontal #{form_display}", id: "table"}, remote: true) do |f|  %>
- <h2><%= table.class.name %> Form </h2>
-  <%= render 'layouts/error_messages', object: f.object %>  
+<h2><%= table.class.name %> Form </h2>
+<%= render 'layouts/error_messages', object: f.object %>  
 
-  <% headers.each do |key, val| %>
-  	  <%= render 'layouts/form_field', f: f, key: key, val: val, datum: datum %>
-  <% end %>
+<% headers.each do |key, val| %>
+<%= render 'layouts/form_field', f: f, key: key, val: val, datum: datum %>
+<% end %>
 
-
-  <%= f.submit "Update", name: "update", class: "btn btn-large btn-primary" %>
-  <%= f.submit "Find", name: "find", class: "btn btn-large btn-primary" %>
-  <%= link_to "Clear", {controller: controller_name, action: "index"}, class: "btn btn-large btn-primary" %>
+<%= f.submit "Update", name: "update", class: "btn btn-large btn-primary" %>
+<% if action_name != "new" %>
+<%= f.submit "Find", name: "find", class: "btn btn-large btn-primary" %>
+<% end %>
+<%= link_to "Clear", {controller: controller_name, action: "index"}, class: "btn btn-large btn-primary" %>
 <% end %>

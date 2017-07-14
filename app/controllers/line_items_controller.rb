@@ -22,13 +22,20 @@ class LineItemsController < ApplicationController
       end
 
       if request.referer == line_items_url
-        redirect_to line_item_path(@datum.id)
+        #redirect_to line_item_path(@datum.id)
+        redirect_to edit_recipient_path(@datum.id)
       end
     else
       @datum = LineItem.find_or_initialize_by(id: params[:line_item][:id])
       @datum.update_attributes(line_item_params)
-      @datum.save
 
+
+      if @datum.save
+        flash[:notice] = "Successfully updated"
+      else
+        flash[:error] = "Error:" + @datum.errors.full_messages
+      end
+      
       respond_to do |format|
         format.js
       end
@@ -62,7 +69,7 @@ class LineItemsController < ApplicationController
 
       orders = Order.all
       orders.each do |o|
-        @order_ids.push("#{o.id} - #{o.order_number}")
+        @order_ids.push("#{o.id} - #{o.number}")
       end
     end
 

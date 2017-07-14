@@ -16,19 +16,25 @@
   def create
     if params[:find]
       @datum= Bakery.find_by(name: params[:bakery][:name])
-
+      puts @datum
       respond_to do |format|
         format.js
       end
 
       if request.referer == bakeries_url
         redirect_to bakery_path(@datum.id)
+        #redirect_to edit_bakery_path(@datum.id)
       end
 
     else
       @datum = Bakery.find_or_initialize_by(id: params[:bakery][:id])
       @datum.update_attributes(bakery_params)
-      @datum.save
+
+      if @datum.save
+        flash[:notice] = "Successfully updated"
+      else
+        flash[:error] = "Error:" + @datum.errors.full_messages
+      end
 
       respond_to do |format|
         format.js

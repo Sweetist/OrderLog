@@ -68,9 +68,9 @@ ActiveRecord::Schema.define(version: 20170714032356) do
     t.integer "recipient_id"
     t.integer "user_id"
     t.index ["bakery_id"], name: "index_orders_on_bakery_id"
-    t.index ["order_number"], name: "index_orders_on_order_number", unique: true
     t.index ["recipient_id"], name: "index_orders_on_recipient_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
+    t.index [nil], name: "index_orders_on_order_number", unique: true
   end
 
   create_table "recipients", force: :cascade do |t|

@@ -22,13 +22,20 @@ class OrdersController < ApplicationController
       end
 
       if request.referer == orders_url
-        redirect_to order_path(@datum.id)
+        #redirect_to order_path(@datum.id)
+        redirect_to edit_order_path(@datum.id)
       end
 
     else
       @datum = Order.find_or_initialize_by(id: params[:order][:id])
       @datum.update_attributes(order_params)
-      @datum.save
+      
+      
+      if @datum.save
+        flash[:notice] = "Successfully updated"
+      else
+        flash[:error] = "Error:" + @datum.errors.full_messages
+      end
 
       respond_to do |format|
         format.js
