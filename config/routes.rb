@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'line_items/index'
+
+  get 'line_items/new'
+
   devise_for :users
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
@@ -26,12 +30,18 @@ Rails.application.routes.draw do
   delete 'recipients', to: 'recipients#destroy'
   get 'recipients/edit', to: 'recipients#edit'
   
+
+  get 'line_items', to: 'line_items#index'
+  delete 'line_items', to: 'line_items#destroy'
+  get 'line_items/edit', to: 'line_items#edit'
+
   #get 'unified', to: 'unified#index'
 
   resources :deliveries
   resources :bakeries
   resources :orders
   resources :recipients
+  resources :line_items
 
   namespace :api, defaults: { format: 'json' } do 
     devise_for :users,  controllers: { sessions: 'sessions' }
@@ -43,5 +53,6 @@ Rails.application.routes.draw do
     resources :bakeries 
     resources :recipients 
     resources :deliveries
+    resources :line_items
   end
 end

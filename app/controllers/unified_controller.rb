@@ -14,35 +14,34 @@ class UnifiedController < ApplicationController
   end
 
   private
-    def load_table
+  def load_table
     @readonly=[]
-      data_classes = [Delivery, Order, Bakery, Recipient]
-      
-      @headers = []
-      @visible = []
-      data_classes.each do |table|
-        @headers.push(table.columns_hash)
-        @visible.concat(table.column_names)
-      end
-      @bakery_ids = []
-      bakeries = Bakery.all
-      bakeries.each do |b|
-        @bakery_ids.push("#{b.id} - #{b.name}")
-      end
+    data_classes = [Delivery, Order, Bakery, Recipient]
+    
+    @headers = []
+    @visible = []
+    data_classes.each do |table|
+      @headers.push(table.columns_hash)
+      @visible.concat(table.column_names)
+    end
+    @bakery_ids = []
+    bakeries = Bakery.all
+    bakeries.each do |b|
+      @bakery_ids.push("#{b.id} - #{b.name}")
+    end
 
-      @null_data = []
-      data_classes.each do |table|
-        @null_data.push(table.new)
-      end
-      
-      @data = Delivery.all
-
-      @null_delivery = Delivery.new
-      @null_order = Order.new
-      @null_bakery = Bakery.new
-      @null_recipient = Recipient.new
-
-      @viewable_fields = ["name", "order_number"]
+    @null_data = []
+    data_classes.each do |table|
+      @null_data.push(table.new)
     end
     
+    @data = Delivery.all
+
+    @null_delivery = Delivery.new
+    @null_order = Order.new
+    @null_bakery = Bakery.new
+    @null_recipient = Recipient.new
+
+    @viewable_fields = ["name", "order_number"]
+  end
 end

@@ -1,7 +1,7 @@
  class BakeriesController < ApplicationController
 
   before_action :load_table, only: [:new, :edit, :index, :show]
-  before_action :load_bakery, only: [:edit, :create, :show, :destroy, :edit]
+  before_action :load_bakery, only: [:edit, :create, :show, :destroy]
 
   def new
   end
@@ -34,9 +34,7 @@
         format.js
       end
 
-      if request.referer == bakeries_url
         redirect_to bakeries_url
-      end
     end
 
   end
@@ -54,7 +52,7 @@
 
     def load_table
     @readonly=[]
-      #@headers = Bakery.columns_hash
+    @transitions=[]
       @headers = [Bakery.columns_hash]
       @data = Bakery.all
       @table = Bakery.new

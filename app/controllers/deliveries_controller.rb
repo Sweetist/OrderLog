@@ -28,17 +28,17 @@ class DeliveriesController < ApplicationController
     else
       @datum = Delivery.find_or_initialize_by(id: params[:delivery][:id])
       @datum.update_attributes(delivery_params)
+
       @datum.save
 
+      puts @datum.errors.full_messages
 
       respond_to do |format|
         format.js
       end
-
       
-      #if request.referer == deliveries_url || request.referer == unified_url
         redirect_to deliveries_url
-      #end
+      
     end
   end
 
@@ -71,7 +71,6 @@ class DeliveriesController < ApplicationController
     when "resolve_issue" 
       @datum.resolve_issue
     end
-    puts @datum.state
     @datum.save
     redirect_to deliveries_url
   end
@@ -86,8 +85,16 @@ class DeliveriesController < ApplicationController
       @data = Delivery.all
 
       @table = Delivery.new
-      @visible = ["delivery_number", "order_number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "state"]
+      @visible = ["delivery_number", "order_number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "order_id", "state"]
       @bakery_ids = []
+      @recipient_ids = []
+      @order_ids = []
+
+      orders = Order.all
+      orders.each do |o|
+        @order_ids.push("#{o.id} - #{o.order_number}")
+      end
+
       bakeries = Bakery.all
       bakeries.each do |b|
         @bakery_ids.push("#{b.id} - #{b.name}")
@@ -95,7 +102,9 @@ class DeliveriesController < ApplicationController
     end
 
     def delivery_params
-      params.require(:delivery).permit(Delivery.column_names)
+      allowed = Delivery.column_names
+      allowed.delete("state")
+      params.require(:delivery).permit(allowed)
     end
 
     def load_delivery

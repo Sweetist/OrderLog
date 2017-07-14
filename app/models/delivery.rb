@@ -1,13 +1,22 @@
 class Delivery < ApplicationRecord
-	belongs_to :bakery, optional: true
 	belongs_to :order, optional: true
-	belongs_to :recipient, optional: true
 
 	#initial not working -> default value must be manually set
 
 	after_initialize :set_default
 
 	state_machine initial: :new do
+
+		after_transition any => :out_for_delivery do |delivery, transition|
+			delivery.pickup_time = Time.now
+		end
+
+		after_transition any => :delivered do |delivery, transition|
+			delivery.dropoff_time = Time.now
+			if !delivery.scheduled_delivery.nil?
+				delivery.is_on_time = Time.now < delivery.scheduled_delivery 
+			end 
+		end
 
 		event :assign do
 			transition [:new, :issue_resolved] => :assigned

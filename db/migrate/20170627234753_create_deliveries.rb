@@ -19,5 +19,7 @@ class CreateDeliveries < ActiveRecord::Migration[5.1]
       
       t.timestamps
     end
+
+    add_index :deliveries, :delivery_number, unique: true
   end
 end
