@@ -14,6 +14,7 @@ module Api
         @datum = Bakery.find_or_initialize_by(id: params[:id])
         @datum.update_attributes(bakery_params)
         @datum.save
+        render json: { message: "bakery saved"}
       end
     end
 

@@ -34,6 +34,7 @@ module Api
         end
         @datum.update_attributes(order_params)
         @datum.save
+        render json: { message: "order saved"}
       end
     end
 
@@ -59,6 +60,7 @@ module Api
     def order_params
       permittable = Order.column_names
       permittable.append("bakery")
+      permittable.append("bakery_id")
       params.permit(permittable)
     end
 

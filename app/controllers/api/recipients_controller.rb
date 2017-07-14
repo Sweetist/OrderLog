@@ -12,6 +12,7 @@ module Api
         @datum = Recipient.find_or_initialize_by(id: params[:id])
         @datum.update_attributes(recipient_params)
         @datum.save
+        render json: { message: "recipients saved"}
       end
     end
 

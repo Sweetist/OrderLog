@@ -13,6 +13,7 @@ module Api
         @datum = LineItem.find_or_initialize_by(id: params[:id])
         @datum.update_attributes(line_item_params)
         @datum.save
+        render json: { message: "line_item saved"}
       end
     end
 

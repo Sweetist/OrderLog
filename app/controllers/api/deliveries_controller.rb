@@ -13,6 +13,7 @@ module Api
         @datum = Delivery.find_or_initialize_by(id: params[:id])
         @datum.update_attributes(delivery_params)
         @datum.save
+        render json: { message: "delivery saved"}
       end
     end
 
