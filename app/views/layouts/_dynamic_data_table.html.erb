@@ -36,13 +36,14 @@
         <%= render 'layouts/data_row', datum: datum.recipient || @null_recipient %>
 
         <% end %>
-
-        <td unless @transitions.empty?> 
+        <% if !@transitions.empty? %>
+        <td> 
           <% @transitions[datum.state.to_sym].each do |transition| %>
           <%= link_to transition, {controller: controller_name, action: 'transition', id: datum.id, transition: transition}, method: :post %>
           <br>
           <% end %>
         </td>
+        <% end %>
 
         <td><%= link_to "edit", {controller: controller_name, action: 'edit', id: datum.id }, method: :get %></td>
         <td><%= link_to "delete", datum, method: :delete %></td>

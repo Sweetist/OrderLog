@@ -57,18 +57,17 @@ class OrdersController < ApplicationController
 
   private
 
-    def load_table
-      @transitions=[]
+  def load_table
     @readonly=[]
     @transitions=[]
-      @headers = [Order.columns_hash]
-      @data = Order.all
-      @table = Order.new
+    @headers = [Order.columns_hash]
+    @data = Order.all
+    @table = Order.new
 
-      @bakery_ids = []
-      @recipient_ids = []
+    @bakery_ids = []
+    @recipient_ids = []
 
-      bakeries = Bakery.all
+    bakeries = Bakery.all
       bakeries.each do |b|
         @bakery_ids.push("#{b.id} - #{b.name}")
       end
