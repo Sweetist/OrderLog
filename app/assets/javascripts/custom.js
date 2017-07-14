@@ -1,12 +1,17 @@
 var ready = function(){
     $(".toggle-row").on("click", toggle_row);
-    $(".hide-col").on("click", hide_column);
     
+    //Temporarily hidden
+    //$(".hide-col").on("click", hide_column);
+    //$(".hidden-col").trigger("click");
+    $(".hidden-col").each(hide_column);
+
+
     $("#toggle-form").on("click", function(){
         $(".display-form-group").toggle(500);
     });
 
-    $(".hidden-col").trigger("click");
+
     $(".toggle-hidden-field").on("click", function(){
         $(this).parent().children(".hidden-field").toggle(250);
     });
