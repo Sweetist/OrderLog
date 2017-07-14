@@ -10,7 +10,6 @@ module Api
         end
       else
         @datum = Order.find_or_initialize_by(id: params[:id])
-        @datum.update_attributes(order_params)
         if (params[:bakery])
           bakery = Bakery.find_or_initialize_by(name: params[:bakery][:name])
           bakery.update_attributes(params[:bakery].permit(Bakery.column_names))
@@ -32,6 +31,7 @@ module Api
             line_item.save
           end
         end
+        @datum.update_attributes(order_params)
         @datum.save
       end
     end
