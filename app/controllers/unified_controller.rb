@@ -44,5 +44,4 @@ class UnifiedController < ApplicationController
 
     @viewable_fields = ["name", "order_number"]
   end
-  
 end

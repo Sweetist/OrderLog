@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   
+  has_many :orders, dependent: :nullify
+
   #acts_as_token_authenticatable
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
@@ -13,7 +15,7 @@ class User < ApplicationRecord
   #       :recoverable, :rememberable, :trackable, :validatable
 
   # Use this before callback to set up User access_token.
-  #before_save :ensure_authentication_token
+  before_save :ensure_authentication_token
 
   # If the user has no access_token, generate one.
   def ensure_authentication_token
@@ -23,12 +25,10 @@ class User < ApplicationRecord
   end
 
   private
-
     def generate_access_token
       loop do
-        token = Devise.friendly_token
-        break token unless User.where(access_token: token).first
+        token = SecureRandom.base58(24)
+        break token unless User.where(authentication_token: token).first
       end
     end
-
 end

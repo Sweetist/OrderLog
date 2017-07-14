@@ -67,7 +67,7 @@ class OrdersController < ApplicationController
       
       recipients = Recipient.all
       recipients.each do |r|
-        @recipient_ids.push("#{r.id} - #{r.name}")
+        @recipient_ids.push("#{r.id} - #{r.first_name} #{r.last_name}")
       end
 
       @visible = Order.column_names
