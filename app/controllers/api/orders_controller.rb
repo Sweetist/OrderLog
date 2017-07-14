@@ -5,7 +5,7 @@ module Api
 
     def create
       if params[:find]
-        @datum= Order.find_by(order_number: params[:order_number])
+        @datum= Order.find_by(number: params[:number])
         if request.referer == orders_url
           redirect_to order_path(@datum.id)
         end

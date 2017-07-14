@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
 
   def create
     if params[:find]
-      @datum= Order.find_by(order_number: params[:order][:order_number])
+      @datum= Order.find_by(number: params[:order][:number])
 
       respond_to do |format|
         format.js
@@ -52,6 +52,7 @@ class OrdersController < ApplicationController
   private
 
     def load_table
+      @transitions=[]
     @readonly=[]
       @headers = [Order.columns_hash]
       @data = Order.all
