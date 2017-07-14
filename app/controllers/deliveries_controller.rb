@@ -86,7 +86,12 @@ class DeliveriesController < ApplicationController
   def load_table
     @readonly=["pickup_time", "dropoff_time", "is_on_time", "state"]
 
-
+    if false   
+      @transitions = [:assign, :begin_delivery, :pickup_order, :deliver, 
+        :request_feedback, :receive_feedback, :report_issue, :resolve_issue]
+    else
+      @transitions
+    end
       @headers = [Delivery.columns_hash]
 
       @data = Delivery.all
