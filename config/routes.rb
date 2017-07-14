@@ -49,6 +49,7 @@ Rails.application.routes.draw do
 
     #post 'users/sign_in', to: 'sessions#create'
     #mount_devise_token_auth_for 'User', at: 'auth'
+    post 'deliveries/transition/:id', to: 'deliveries#transition'
 
     resources :orders
     resources :bakeries 

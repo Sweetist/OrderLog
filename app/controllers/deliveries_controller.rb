@@ -112,7 +112,7 @@ class DeliveriesController < ApplicationController
       @data = Delivery.all
 
       @table = Delivery.new
-      @visible = ["delivery_number", "number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "order_id", "state"]
+      @visible = ["id","delivery_number", "number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "order_id", "state"]
       
       @order_ids = []
 

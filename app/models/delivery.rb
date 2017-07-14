@@ -7,11 +7,12 @@ class Delivery < ApplicationRecord
 
 	state_machine initial: :new do
 
-		after_transition any => :out_for_delivery do |delivery, transition|
+		after_transition [:en_route_to_pickup, :issue_resolved] => :out_for_delivery do |delivery, transition|
 			delivery.pickup_time = Time.now
 		end
 
-		after_transition any => :delivered do |delivery, transition|
+		#can also do any
+		after_transition [:out_for_delivery, :issue_resolved] => :delivered do |delivery, transition|
 			delivery.dropoff_time = Time.now
 			if !delivery.scheduled_delivery.nil?
 				delivery.is_on_time = Time.now < delivery.scheduled_delivery 

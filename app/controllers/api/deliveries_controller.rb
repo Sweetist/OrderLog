@@ -46,9 +46,11 @@ module Api
       when "resolve_issue" 
         @datum.resolve_issue
       end
-      puts @datum.state
-      @datum.save
-      redirect_to deliveries_url
+      #@datum.save
+      #puts @datum.to_json
+      #puts Delivery.find_by(id: params[:id]).to_json
+      render json: { memory: @datum.state, db: Delivery.find_by(id: params[:id]).state}
+      #render json: { message: "successful transition" }
     end
 
     def show
