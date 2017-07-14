@@ -16,6 +16,6 @@ class CreateOrders < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    add_index :orders, :order, unique: true
+    add_index :orders, :number, unique: true
   end
 end
