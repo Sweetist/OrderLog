@@ -50,7 +50,8 @@ module Api
       if @datum.nil?
         render json: { message: "order not found", status: :not_found }
       else
-        render json: @datum.to_json(:include => :line_items_)
+        render json: @datum.to_json(
+          :include => [:line_items, :bakery, :recipient])
       end
     end
 

@@ -52,7 +52,7 @@ ActiveRecord::Schema.define(version: 20170714032356) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "number"
+    t.string "number"
     t.date "date"
     t.float "subtotal"
     t.float "commission"
