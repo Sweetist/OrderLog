@@ -71,6 +71,6 @@ class Delivery < ApplicationRecord
 	private
 
 	def set_default
-		self.state ||= :new
+		self.state ||= :assigned
 	end
 end
