@@ -22,12 +22,12 @@ class DeliveriesController < ApplicationController
       end
 
       if request.referer == deliveries_url
-        #redirect_to delivery_path(@datum.id)
-        redirect_to edit_delivery_path(@datum.id)
+        redirect_to edit_delivery_path(datum.id)
       end
 
     else
       @datum = Delivery.find_or_initialize_by(id: params[:delivery][:id])
+      @datum = Delivery.create(id: params[:delivery][:id])
       @datum.update_attributes(delivery_params)
 
 
@@ -40,7 +40,7 @@ class DeliveriesController < ApplicationController
       respond_to do |format|
         format.js
       end
-      
+
       redirect_to deliveries_url
     end
   end
@@ -73,11 +73,6 @@ class DeliveriesController < ApplicationController
       @datum.report_issue
     when "resolve_issue" 
       @datum.resolve_issue
-    end
-    if @datum.save
-      flash[:notice] = "Successfully updated"
-    else
-      flash[:error] = "Error:" + @datum.errors.full_messages
     end
     redirect_to deliveries_url
   end

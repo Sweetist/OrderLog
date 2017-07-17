@@ -16,6 +16,8 @@ class CreateDeliveries < ActiveRecord::Migration[5.1]
       t.string :state
 
       t.string :notes
+
+      #t.integer :lock_version, default: 0, null: false
       
       t.timestamps
     end

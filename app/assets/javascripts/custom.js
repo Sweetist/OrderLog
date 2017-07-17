@@ -15,12 +15,10 @@ var ready = function(){
     $(".toggle-hidden-field").on("click", function(){
         $(this).parent().children(".hidden-field").toggle(250);
     });
-    var clock = $("#clock");
-    setInterval( function(){
-        var now = new Date()
-        var clockText = now.getHours()+":"+(now.getMinutes()>10?now.getMinutes():"0"+now.getMinutes())+":"+(now.getSeconds()>10?now.getSeconds():"0"+now.getSeconds())
-        clock.html(clockText);
-    }, 1000);
+
+    clock = $("#clock");
+    
+    update_time();
 };
 
 // Toggles hide and show for table rows
@@ -57,6 +55,13 @@ var update_display = function update_display(elements){
             $this.show();
         }
     });
+};
+
+var update_time = function update_time(){
+        var now = new Date();
+        var clockText = now.getHours()+":"+(now.getMinutes()>10?now.getMinutes():"0"+now.getMinutes())+":"+(now.getSeconds()>10?now.getSeconds():"0"+now.getSeconds());
+        clock.html(clockText);
+        setTimeout(update_time, 1000);
 };
 
 //$(document).ready(ready);
