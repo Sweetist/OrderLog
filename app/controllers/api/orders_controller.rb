@@ -35,6 +35,9 @@ module Api
         end
         @datum.update_attributes(order_params)
         @datum.save
+
+        @datum.delivery.update_attributes(params.permit(Delivery.column_names-Order.column_names))
+
         @datum.delivery.save
         render json: { message: "order saved"}
       end

@@ -30,7 +30,9 @@ module Api
       transition = params[:transition]
       case transition
       when "assign"
-        @datum.assign
+        if !@datum.assign
+          render json: { error: @datum.errors.full_messages }
+        end
       when "begin_delivery"
         @datum.begin_delivery
       when "pickup_order"
@@ -46,9 +48,7 @@ module Api
       when "resolve_issue" 
         @datum.resolve_issue
       end
-      #puts @datum.to_json
-      #puts Delivery.find_by(id: params[:id]).to_json
-      render json: { memory: @datum.state, db: Delivery.find_by(id: params[:id]).state}
+      render json: { memory: @datum.state, db: Delivery.find_by(id: params[:id]).state }
       #render json: { message: "successful transition" }
     end
 

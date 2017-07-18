@@ -58,7 +58,11 @@ class DeliveriesController < ApplicationController
     transition = params[:transition]
     case transition
     when "assign"
-      @datum.assign
+      if @datum.assign
+        flash[:notice] = "success"
+      else
+        flash[:error] = @datum.errors.full_messages 
+      end
     when "begin_delivery"
       @datum.begin_delivery
     when "pickup_order"

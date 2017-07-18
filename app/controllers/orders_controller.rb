@@ -42,7 +42,6 @@ class OrdersController < ApplicationController
       end
 
       redirect_to orders_url
-      
     end
   end
 
