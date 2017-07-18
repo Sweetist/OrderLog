@@ -48,7 +48,7 @@ module Api
       when "resolve_issue" 
         @datum.resolve_issue
       end
-      render json: { memory: @datum.to_json, db: Delivery.find_by(id: params[:id]).to_json }
+      render json: { memory: @datum, db: Delivery.find_by(id: params[:id]) }
       #render json: { message: "successful transition" }
     end
 
