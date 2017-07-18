@@ -27,14 +27,9 @@ class DeliveriesController < ApplicationController
 
     else
       @datum = Delivery.find_or_initialize_by(id: params[:delivery][:id])
-      #@datum = Delivery.create(id: params[:delivery][:id])
-      @datum.update_attributes(delivery_params)
-
-
-      if @datum.save
-        flash[:notice] = "Successfully updated"
-      else
-        flash[:error] = "Error:" + @datum.errors.full_messages
+      #@datum = Delivery.new
+      if !@datum.update_attributes(delivery_params)
+        flash[:error] = @datum.errors.full_messages
       end
 
       respond_to do |format|
@@ -55,6 +50,7 @@ class DeliveriesController < ApplicationController
   end
 
   def transition
+    #@datum.delivery_number = 2
     transition = params[:transition]
     case transition
     when "assign"

@@ -1,11 +1,12 @@
 class Delivery < ApplicationRecord
+
 	belongs_to :order, optional: true
 
 	#initial not working -> default value must be manually set
 
 	after_initialize :set_default
 
-	state_machine initial: :new do
+	state_machine :state, initial: :new do
 
 		after_transition [:en_route_to_pickup, :issue_resolved] => :out_for_delivery do |delivery, transition|
 			delivery.pickup_time = Time.now
@@ -17,6 +18,11 @@ class Delivery < ApplicationRecord
 			if !delivery.scheduled_delivery.nil?
 				delivery.is_on_time = Time.now < delivery.scheduled_delivery 
 			end 
+		end
+
+		after_transition any => any do |delivery, transition|
+			puts delivery.to_json
+			delivery.save	
 		end
 
 		event :assign do
@@ -71,6 +77,12 @@ class Delivery < ApplicationRecord
 	private
 
 	def set_default
+		if !self.state.nil?
+			#puts "BEFORE: "+self.state
+		end
 		self.state ||= :new
+		if !self.state.nil?
+			#puts "AFTER: "+self.state
+		end
 	end
 end
