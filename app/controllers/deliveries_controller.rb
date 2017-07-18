@@ -27,7 +27,7 @@ class DeliveriesController < ApplicationController
 
     else
       @datum = Delivery.find_or_initialize_by(id: params[:delivery][:id])
-      @datum = Delivery.create(id: params[:delivery][:id])
+      #@datum = Delivery.create(id: params[:delivery][:id])
       @datum.update_attributes(delivery_params)
 
 

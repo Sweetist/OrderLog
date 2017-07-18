@@ -1,0 +1,22 @@
+class TweetNotifier
+
+  def initialize(tweet) 
+    @tweet = tweet 
+  end
+
+  def notify 
+    notify_mentions 
+    notify_followers 
+  end
+
+  private
+
+    def notify_mentions
+      # search for @ mentions and notify users
+    end
+    
+    def notify_followers
+      # add tweet to timelines of user's followers
+    end
+
+end

@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20170714032356) do
     t.boolean "is_on_time"
     t.string "courier_service"
     t.float "courier_fee"
-    t.string "state"
+    t.string "state", default: "new"
     t.string "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
