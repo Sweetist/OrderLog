@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170714032356) do
+ActiveRecord::Schema.define(version: 20170718203120) do
 
   create_table "bakeries", force: :cascade do |t|
     t.string "name"
@@ -80,6 +80,12 @@ ActiveRecord::Schema.define(version: 20170714032356) do
     t.datetime "updated_at", null: false
     t.index ["first_name"], name: "index_recipients_on_first_name"
     t.index ["last_name"], name: "index_recipients_on_last_name"
+  end
+
+  create_table "state_tests", force: :cascade do |t|
+    t.string "state"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

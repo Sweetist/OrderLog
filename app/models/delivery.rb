@@ -20,11 +20,6 @@ class Delivery < ApplicationRecord
 			end 
 		end
 
-		after_transition any => any do |delivery, transition|
-			puts delivery.to_json
-			delivery.save	
-		end
-
 		event :assign do
 			transition [:new, :issue_resolved] => :assigned
 		end

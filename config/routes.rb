@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'state_tests/test'
+
   get 'line_items/index'
 
   get 'line_items/new'
@@ -11,10 +13,12 @@ Rails.application.routes.draw do
   #post 'unified', to: 'unified#create'
   #get 'unified/edit', to: 'unified#edit'
   root 'deliveries#index'
+    
+  #get 'deliveries', to: 'deliveries#index'  
+  #delete 'deliveries', to: 'deliveries#destroy'
+  #get 'deliveries/edit', to: 'deliveries#edit'
   
-  get 'deliveries', to: 'deliveries#index'  
-  delete 'deliveries', to: 'deliveries#destroy'
-  get 'deliveries/edit', to: 'deliveries#edit'
+  #post 'deliveries/update', to: 'deliveries#update'
 
   post 'deliveries/transition/:id', to: 'deliveries#transition'
 
@@ -34,6 +38,11 @@ Rails.application.routes.draw do
   get 'line_items', to: 'line_items#index'
   delete 'line_items', to: 'line_items#destroy'
   get 'line_items/edit', to: 'line_items#edit'
+
+  #
+
+  get 'test/:id', to: 'state_tests#show'
+  get 'test/transition/:id', to: 'state_tests#transition'
 
   #get 'unified', to: 'unified#index'
 

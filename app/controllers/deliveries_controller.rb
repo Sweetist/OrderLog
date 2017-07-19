@@ -27,7 +27,8 @@ class DeliveriesController < ApplicationController
 
     else
       @datum = Delivery.find_or_initialize_by(id: params[:delivery][:id])
-      #@datum = Delivery.new
+      @datum.save
+
       if !@datum.update_attributes(delivery_params)
         flash[:error] = @datum.errors.full_messages
       end
@@ -38,6 +39,14 @@ class DeliveriesController < ApplicationController
 
       redirect_to deliveries_url
     end
+  end
+
+  def update
+    @datum = Delivery.find_by(id: params[:delivery][:id])
+    if !@datum.update(delivery_params)
+      flash[:error] = @datum.errors.full_messages
+    end
+    redirect_to deliveries_url
   end
 
   def destroy
@@ -52,27 +61,10 @@ class DeliveriesController < ApplicationController
   def transition
     #@datum.delivery_number = 2
     transition = params[:transition]
-    case transition
-    when "assign"
-      if @datum.assign
-        flash[:notice] = "success"
-      else
-        flash[:error] = @datum.errors.full_messages 
-      end
-    when "begin_delivery"
-      @datum.begin_delivery
-    when "pickup_order"
-      @datum.pickup_order
-    when "deliver" 
-      @datum.deliver
-    when "request_feedback"
-      @datum.request_feedback
-    when "receive_feedback"
-      @datum.receive_feedback
-    when "report_issue"
-      @datum.report_issue
-    when "resolve_issue" 
-      @datum.resolve_issue
+    if @datum.send(transition)
+      flash[:success] = 'Delivery state transitioned'
+    else
+      flash[:error] = @datum.errors.full_messages
     end
     redirect_to deliveries_url
   end
@@ -81,50 +73,45 @@ class DeliveriesController < ApplicationController
   def load_table
     @readonly=["pickup_time", "dropoff_time", "is_on_time", "state"]
 
-    if false   
-      @transitions = [:assign, :begin_delivery, :pickup_order, :deliver, 
-        :request_feedback, :receive_feedback, :report_issue, :resolve_issue]
-    else
-      @transitions = {
-        new: [:assign, :report_issue],
-        assigned: [:begin_delivery, :report_issue],
-        en_route_to_pickup: [:pickup_order, :report_issue],
-        out_for_delivery: [:deliver, :report_issue],
+    @transitions = {
+      new: [:assign, :report_issue],
+      assigned: [:begin_delivery, :report_issue],
+      en_route_to_pickup: [:pickup_order, :report_issue],
+      out_for_delivery: [:deliver, :report_issue],
 
-        delivered: [:request_feedback],
-        feedback_requested: [:receive_feedback],
-        
-        issue_reported: [:resolve_issue],
-        issue_resolved: [:assign, :begin_delivery, :pickup_order, :deliver],
-        
-        complete: [],
-        canceled: []
-      }
+      delivered: [:request_feedback],
+      feedback_requested: [:receive_feedback],
+
+      issue_reported: [:resolve_issue],
+      issue_resolved: [:assign, :begin_delivery, :pickup_order, :deliver],
+
+      complete: [],
+      canceled: []
+    }
+    
+    @headers = [Delivery.columns_hash]
+
+    @data = Delivery.all.sort do |a,b|
+      a.state <=> b.state
     end
 
-      @headers = [Delivery.columns_hash]
+    @table = Delivery.new
+    @visible = ["id","delivery_number", "number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "order_id", "state"]
 
-      @data = Delivery.all
+    @order_ids = []
 
-      @table = Delivery.new
-      @visible = ["id","delivery_number", "number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "order_id", "state"]
-      
-      @order_ids = []
-
-      orders = Order.all
-      orders.each do |o|
-        @order_ids.push("#{o.id} - #{o.number}")
-      end
-
+    orders = Order.all
+    orders.each do |o|
+      @order_ids.push("#{o.id} - #{o.number}")
     end
 
-    def delivery_params
-      allowed = Delivery.column_names
-      allowed.delete("state")
-      params.require(:delivery).permit(allowed)
-    end
-
-    def load_delivery
-      @datum = Delivery.find_by(id: params[:id])
-    end
   end
+
+  def delivery_params
+    params.require(:delivery).permit(Delivery.column_names)
+  end
+
+  def load_delivery
+    @datum = Delivery.find_by(id: params[:id])
+  end
+end
