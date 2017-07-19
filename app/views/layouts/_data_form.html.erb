@@ -18,5 +18,24 @@
 
 
 <%= link_to "Clear", {controller: controller_name, action: "index"}, class: "btn btn-large btn-primary" %>
+<% end %>
+
+<% if controller_name == "orders" && action_name == "edit" %>
+
+<% datum.line_items.each do |item| %>
+
+<div class="card">
+  <div class="card-block">
+    <blockquote class="card-blockquote">
+		<% item.attributes.each do |key, val| %>
+		<%= key %> : <%= val %>
+		<br>
+		<% end %>
+		<%= link_to "view", edit_line_item_path(item.id) %>
+		<%= link_to "delete", line_item_path(item.id), method: :delete %>
+    </blockquote>
+  </div>
+</div>
+<% end %>
 
 <% end %>
