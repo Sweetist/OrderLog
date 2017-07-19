@@ -6,12 +6,17 @@
 <%= render 'layouts/form_field', f: f, key: key, val: val, datum: datum %>
 <% end %>
 
+<% if action_name !="edit" %>
 <%= f.submit "Create", name: "update", class: "btn btn-large btn-primary" %>
-<% if action_name != "new" %>
-<%= f.submit "Find", name: "find", class: "btn btn-large btn-primary" %>
 <% end %>
 
+<% if action_name != "new" %>
+<%= f.submit "Find", name: "find", class: "btn btn-large btn-primary" %>
+
 <%= f.submit "Update", name: "update", class: "btn btn-large btn-primary", method: :patch %>
+<% end %>
+
 
 <%= link_to "Clear", {controller: controller_name, action: "index"}, class: "btn btn-large btn-primary" %>
+
 <% end %>

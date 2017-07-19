@@ -16,17 +16,16 @@ class DeliveriesController < ApplicationController
   def create
     if params[:find]
       @datum= Delivery.find_by(delivery_number: params[:delivery][:delivery_number])
-
       respond_to do |format|
         format.js
       end
-
       if request.referer == deliveries_url
         redirect_to edit_delivery_path(datum.id)
       end
-
     else
+      puts "CREATEEEEEEEEEEEEE"
       @datum = Delivery.find_or_initialize_by(id: params[:delivery][:id])
+
       @datum.save
 
       if !@datum.update_attributes(delivery_params)
@@ -42,6 +41,7 @@ class DeliveriesController < ApplicationController
   end
 
   def update
+    puts "UPDATEEEEEEEEEEEEEEEEE"
     @datum = Delivery.find_by(id: params[:delivery][:id])
     if !@datum.update(delivery_params)
       flash[:error] = @datum.errors.full_messages
@@ -92,7 +92,7 @@ class DeliveriesController < ApplicationController
     @headers = [Delivery.columns_hash]
 
     @data = Delivery.all.sort do |a,b|
-      a.state <=> b.state
+      a.id <=> b.id
     end
 
     @table = Delivery.new
