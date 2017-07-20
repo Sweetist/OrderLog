@@ -1,24 +1,30 @@
 <% if !datum.nil? %>
 <% datum.attributes.each do |key,val|%>
 
-  <% if datum == @datum %>
-  <td style="background-color:#FFA">
+<% if datum == @datum %>
+<td style="background-color:#FFA">
   <% else %>
   <td>
-  <% end %>
+    <% end %>
     
     <% if val.nil? %>
     <% elsif key == "bakery_id"%>
-      <%= link_to val, bakery_path(val) %>
+    <%= link_to val, bakery_path(val) %>
     <% elsif key == "recipient_id" %>
-      <%= link_to val, recipient_path(val) %>
+    <%= link_to val, recipient_path(val) %>
     <% elsif key == "delivery_id" %>
-      <%= link_to val, delivery_path(val) %>
+    <%= link_to val, delivery_path(val) %>
     <% elsif key == "order_id" %>
-      <%= link_to val, order_path(val) %>
+    <%= link_to val, order_path(val) %>
     <% else %>
+      <% if val.is_a?(ActiveSupport::TimeWithZone) %>
+      <span class="time">
       <%= val %>
+      </span>
+      <% else %>
+      <%= val %>
+      <% end %>
     <% end %>
   </td>
-<% end %>
-<% end %>
+  <% end %>
+  <% end %>

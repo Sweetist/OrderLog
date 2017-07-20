@@ -67,8 +67,8 @@ class DeliveriesController < ApplicationController
 
   private
   def load_table
-    @visible = ["id","delivery_number", "number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "order_id", "state"]
-    #@visible = Delivery.column_names
+    #@visible = ["id","delivery_number", "number", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "order_id", "state"]
+    @visible = Delivery.column_names
     @readonly=["pickup_time", "dropoff_time", "is_on_time", "state"]
 
     @transitions = {

@@ -19,6 +19,7 @@ var ready = function(){
     clock = $("#clock");
     
     update_time();
+    time_to_local();
 };
 
 // Toggles hide and show for table rows
@@ -63,6 +64,12 @@ var update_time = function update_time(){
         clock.html(clockText);
         setTimeout(update_time, 1000);
 };
+
+var time_to_local = function time_to_local(){
+    $(".time").each(function(){
+        $(this).text(new Date($(this).text()).toTimeString());
+    });
+}
 
 //$(document).ready(ready);
 $(document).on('turbolinks:load', ready);
