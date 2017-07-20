@@ -1,10 +1,9 @@
 class CreateDeliveries < ActiveRecord::Migration[5.1]
   def change
     create_table :deliveries do |t|
+      
       t.integer :delivery_number
-      t.date :week
       t.date :date
-      t.string :weekday
       t.time :scheduled_collection
       t.time :scheduled_delivery
       t.time :pickup_time
@@ -12,10 +11,10 @@ class CreateDeliveries < ActiveRecord::Migration[5.1]
       t.boolean :is_on_time
       t.string :courier_service
       t.float :courier_fee
+      t.string :address
+      t.string :notes
 
       t.string :state
-
-      t.string :notes
 
       #t.integer :lock_version, default: 0, null: false
       

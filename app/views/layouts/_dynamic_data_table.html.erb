@@ -13,12 +13,16 @@
         <% else %>
         <th id="<%= val.name %>" class="hide-col hidden-col">
           <% end %>
-
           <a>
             <%= val.name %>
           </a>
         </th> 
         <% end %>
+        <% end %>
+        <% if controller_name=="deliveries" %>
+          <th>
+          <%= address %>
+          </th>
         <% end %>
       </tr>
     </thead>
@@ -31,13 +35,12 @@
 
         <%= render 'layouts/data_row', datum: datum %> 
 
-        <% if controller_name == "unified" %>
-
-        <%= render 'layouts/data_row', datum: datum.order || @null_order %>
-        <%= render 'layouts/data_row', datum: datum.bakery || @null_bakery %>
-        <%= render 'layouts/data_row', datum: datum.recipient || @null_recipient %>
-
+        <% if controller_name=="deliveries" %>
+          <td>
+          <%= datum.order.recipient.address.toString %>
+          </td>
         <% end %>
+
         <% if !@transitions.empty? %>
         <td> 
           <% @transitions[datum.state.to_sym].each do |transition| %>

@@ -10,22 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170718203120) do
+ActiveRecord::Schema.define(version: 20170720165713) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.string "firstname", limit: 255
+    t.string "lastname", limit: 255
+    t.string "address1", limit: 255
+    t.string "address2", limit: 255
+    t.string "city", limit: 255
+    t.string "zipcode", limit: 255
+    t.string "phone", limit: 255
+    t.string "state_name", limit: 255
+    t.string "alternative_phone", limit: 255
+    t.string "company", limit: 255
+    t.integer "state_id"
+    t.integer "country_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.datetime "deleted_at"
+    t.text "delivery_instructions"
+    t.integer "bakery_id"
+    t.integer "recipient_id"
+    t.index ["bakery_id"], name: "index_addresses_on_bakery_id"
+    t.index ["recipient_id"], name: "index_addresses_on_recipient_id"
+  end
 
   create_table "bakeries", force: :cascade do |t|
     t.string "name"
     t.string "bakery_type"
-    t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "address_id"
+    t.index ["address_id"], name: "index_bakeries_on_address_id"
     t.index ["name"], name: "index_bakeries_on_name", unique: true
   end
 
   create_table "deliveries", force: :cascade do |t|
     t.integer "delivery_number"
-    t.date "week"
     t.date "date"
-    t.string "weekday"
     t.time "scheduled_collection"
     t.time "scheduled_delivery"
     t.time "pickup_time"
@@ -33,8 +56,9 @@ ActiveRecord::Schema.define(version: 20170718203120) do
     t.boolean "is_on_time"
     t.string "courier_service"
     t.float "courier_fee"
-    t.string "state"
+    t.string "address"
     t.string "notes"
+    t.string "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "order_id"
@@ -74,18 +98,13 @@ ActiveRecord::Schema.define(version: 20170718203120) do
   create_table "recipients", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.string "address"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "address_id"
+    t.index ["address_id"], name: "index_recipients_on_address_id"
     t.index ["first_name"], name: "index_recipients_on_first_name"
     t.index ["last_name"], name: "index_recipients_on_last_name"
-  end
-
-  create_table "state_tests", force: :cascade do |t|
-    t.string "state"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

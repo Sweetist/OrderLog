@@ -63,6 +63,7 @@ class RecipientsController < ApplicationController
     @data = Recipient.all
     @table = Recipient.new
     @visible = Recipient.column_names
+    @address_ids=[]
   end
 
   def recipient_params

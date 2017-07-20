@@ -63,6 +63,7 @@
       @data = Bakery.all
       @table = Bakery.new
       @visible = Bakery.column_names
+      @address_ids=[]
     end
 
     def bakery_params

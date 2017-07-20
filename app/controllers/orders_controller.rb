@@ -22,7 +22,6 @@ class OrdersController < ApplicationController
       end
 
       if request.referer == orders_url
-        #redirect_to order_path(@datum.id)
         redirect_to edit_order_path(@datum.id)
       end
 
