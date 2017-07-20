@@ -35,7 +35,11 @@
 
         <%= render 'layouts/data_row', datum: datum %> 
 
-      
+        <% if controller_name=="deliveries" && !datum.order.nil? && !datum.order.recipient.nil? && !datum.order.recipient.address.nil? %>
+          <td>
+          <%= datum.order.recipient.address.toString %>
+          </td>
+        <% end %>
 
         <% if !@transitions.empty? %>
         <td> 
