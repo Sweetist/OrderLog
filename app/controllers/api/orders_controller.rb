@@ -9,6 +9,8 @@ module Api
           redirect_to order_path(@datum.id)
         end
       else
+        params = ActionController::Parameters.new(JSON.parse(request.body.string))
+        puts params
         @datum = Order.find_or_initialize_by(id: params[:id])
         @datum.save
         if (params[:bakery])
@@ -33,7 +35,9 @@ module Api
             line_item.save
           end
         end
+        
         @datum.update_attributes(order_params)
+        
         @datum.save
 
         @datum.delivery.update_attributes(params.permit(Delivery.column_names-Order.column_names))
