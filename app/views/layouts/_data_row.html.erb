@@ -7,7 +7,7 @@
   <td>
     <% end %>
     
-    <% if false%>
+    <% if val.nil? %>
     <% elsif key == "bakery_id"%>
     <%= link_to val, bakery_path(val) %>
     <% elsif key == "recipient_id" %>
