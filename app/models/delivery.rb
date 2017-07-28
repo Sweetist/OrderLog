@@ -8,16 +8,21 @@ class Delivery < ApplicationRecord
 
 	state_machine :state, initial: :new do
 
+
 		after_transition [:en_route_to_pickup, :issue_resolved] => :out_for_delivery do |delivery, transition|
 			delivery.pickup_time = Time.now
 		end
 
-		#can also do any
 		after_transition [:out_for_delivery, :issue_resolved] => :delivered do |delivery, transition|
 			delivery.dropoff_time = Time.now
 			if !delivery.scheduled_delivery.nil?
 				delivery.is_on_time = Time.now < delivery.scheduled_delivery 
 			end 
+			delivery.notify_sweetist
+		end
+
+		after_transition [:en_route_to_pickup, :issue_resolved] => :out_for_delivery do |delivery, transition|
+			delivery.notify_sweetist
 		end
 
 		event :assign do
@@ -67,6 +72,10 @@ class Delivery < ApplicationRecord
 		state :issue_resolved
 		state :canceled
 
+	end
+
+	def notify_sweetist
+      Sidekiq::Client.push('at' => Time.current.to_i + 2.seconds, 'class' => SweetOps, 'queue' => 'default', 'retry' => true, 'args' => [self.id])
 	end
 
 	private

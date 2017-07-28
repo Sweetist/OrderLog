@@ -10,7 +10,6 @@ module Api
         end
       else
         params = ActionController::Parameters.new(JSON.parse(request.body.string))
-        puts params
         @datum = Order.find_or_initialize_by(id: params[:id])
         @datum.save
         if (params[:bakery])
