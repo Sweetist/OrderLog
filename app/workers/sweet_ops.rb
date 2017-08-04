@@ -3,7 +3,7 @@ class SweetOps
   include Syncable
 
   def perform(syncable_id)
-    url = "https://requestb.in/1mkospz1"
+    url = "https://requestb.in/zaud27za"
     #url = "#{ENV['SWEET_INTEGRATION_URL']}/api/integrations/#{sweet_integration_num}/execute.json?"
     delivery = Delivery.find_by_id(syncable_id)
     json_payload = delivery.as_json

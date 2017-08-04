@@ -2,10 +2,10 @@
 <% datum.attributes.each do |key,val|%>
 
 <% if datum == @datum %>
-<td style="background-color:#FFA">
-  <% else %>
+  <td style="background-color:#FFA">
+<% else %>
   <td>
-    <% end %>
+<% end %>
     
     <% if val.nil? %>
     <% elsif key == "bakery_id"%>

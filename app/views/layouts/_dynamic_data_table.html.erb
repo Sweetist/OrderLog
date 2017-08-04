@@ -1,7 +1,36 @@
-<div id="show-col" class="hidden"><h4>Hidden Tags</h4></div>
+<div id="show-col" ><h4>Hidden Tags</h4></div>
 <div id="sort-order">
 </div>
-<table class="table table-bordered">
+
+<br/>
+
+<div class="container">
+  <div class="row">
+   <div class="col-lg-12">
+     <div class="button-group">
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-cog"></span> <span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <% headers.each do |header| %>
+          <% header.each do |key, val| %>
+          <li>
+            <a href="#" class="small" data-value="<%= val.name %>" tabIndex="-1">
+              <% if (val.name).in?(@visible) %>
+                <input type="checkbox" checked/>
+              <% else %>
+                <input type="checkbox"/>
+              <% end %>
+              <%= val.name %>
+            </a>
+          </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<table class="table table-bordered table-striped">
   <thead>
     <tr>
       <th></th>
@@ -11,7 +40,7 @@
       <% if (val.name).in?(@visible) %>
       <th id="<%= val.name %>" class="hide-col">
         <% else %>
-        <th id="<%= val.name %>" class="hide-col hidden-col">
+        <th id="<%= val.name %>" class="hide-col">
           <% end %>
           <a>
             <%= val.name %>
@@ -57,3 +86,6 @@
     <% end %>
   </tbody>
 </table>
+<script>
+
+</script>
