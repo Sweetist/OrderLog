@@ -39,6 +39,7 @@ gem 'omniauth'
 gem 'better_errors'
 gem 'pry-rails'
 gem 'sidekiq'
+gem 'rufus-scheduler'
 
 group :development, :test do
   gem 'sqlite3'

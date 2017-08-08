@@ -18,30 +18,49 @@ module Api
           bakery.save
           @datum.bakery_id = bakery.id
         end
-        if (params[:recipient])
-          recipient = Recipient.find_or_initialize_by(first_name: params[:recipient][:first_name], last_name: params[:recipient][:last_name])
-          recipient.update_attributes(params[:recipient].permit(Recipient.column_names))
-          recipient.save
-          @datum.recipient_id = recipient.id
+        if (params[:ship_address])
+          address = Address.find_or_initialize_by(id: params[:ship_address][:id])
+          address.update_attributes(params[:ship_address].permit(Address.column_names))
+          address.save
+
+          if (params[:recipient])
+            recipient = Recipient.find_or_initialize_by(first_name: params[:recipient][:first_name], last_name: params[:recipient][:last_name])
+            recipient.update_attributes(params[:recipient].permit(Recipient.column_names))
+            recipient.address_id = address.id
+            recipient.save
+            @datum.recipient_id = recipient.id
+          else
+            recipient = Recipient.find_or_initialize_by(first_name: params[:ship_address][:firstname], last_name: params[:ship_address][:lastname])
+            recipient.address_id = address.id
+            recipient.save
+            @datum.recipient_id = recipient.id
+          end
         end
         if (params[:line_items])
           items = params[:line_items]
           items.each do |i|
-            puts i
             line_item = LineItem.find_or_initialize_by(id: i[:id])
             line_item.update_attributes(i.permit(LineItem.column_names))
             line_item.order_id = @datum.id
             line_item.save
           end
         end
-        
-        @datum.update_attributes(order_params)
-        
-        @datum.save
-
-        @datum.delivery.update_attributes(params.permit(Delivery.column_names-Order.column_names))
 
         @datum.delivery.save
+        @datum.update_attributes(order_params(params))
+        @datum.save
+        
+        if !@datum.delivery.update_attributes(params.permit(Delivery.column_names-Order.column_names-[:state, "state"]))
+          puts @datum.delivery.errors.full_messages
+          puts @datum.errors.full_messages
+        end
+
+        if !@datum.delivery.save
+          puts @datum.delivery.errors.full_messages
+          puts @datum.errors.full_messages
+        end
+
+
         render json: { message: "order saved"}
       end
     end
@@ -65,11 +84,8 @@ module Api
     end
 
     private
-    def order_params
-      permittable = Order.column_names
-      permittable.append("bakery")
-      permittable.append("bakery_id")
-      params.permit(permittable)
+    def order_params(params=params)
+      params.permit(Order.column_names)
     end
 
     def load_order

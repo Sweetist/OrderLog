@@ -62,7 +62,7 @@ module Api
 
     private
     def delivery_params
-      params.permit(Delivery.column_names)
+      params.permit(Delivery.column_names-[:state])
     end
 
     def load_delivery

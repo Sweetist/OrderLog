@@ -10,7 +10,7 @@ class OrdersController < ApplicationController
   end
 
   def edit
-    render 'new'
+    render 'show'
   end
 
   def create
@@ -50,7 +50,7 @@ class OrdersController < ApplicationController
   end
 
   def show
-    render 'index'
+    #render 'index'
   end
 
   private

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170720165713) do
+ActiveRecord::Schema.define(version: 20170808152627) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "firstname", limit: 255
@@ -23,17 +23,15 @@ ActiveRecord::Schema.define(version: 20170720165713) do
     t.string "state_name", limit: 255
     t.string "alternative_phone", limit: 255
     t.string "company", limit: 255
-    t.integer "state_id"
-    t.integer "country_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
-    t.datetime "deleted_at"
     t.text "delivery_instructions"
-    t.integer "bakery_id"
-    t.integer "recipient_id"
-    t.index ["bakery_id"], name: "index_addresses_on_bakery_id"
-    t.index ["recipient_id"], name: "index_addresses_on_recipient_id"
+    t.integer "user_id"
+    t.integer "state_id"
+    t.integer "country_id"
+    t.index ["country_id"], name: "index_addresses_on_country_id"
+    t.index ["state_id"], name: "index_addresses_on_state_id"
+    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "bakeries", force: :cascade do |t|
@@ -46,17 +44,25 @@ ActiveRecord::Schema.define(version: 20170720165713) do
     t.index ["name"], name: "index_bakeries_on_name", unique: true
   end
 
+  create_table "countries", force: :cascade do |t|
+    t.string "iso_name"
+    t.string "iso"
+    t.string "iso3"
+    t.string "name"
+    t.integer "numcode"
+    t.boolean "states_required", default: false
+    t.datetime "updated_at"
+  end
+
   create_table "deliveries", force: :cascade do |t|
     t.integer "delivery_number"
-    t.date "date"
-    t.time "scheduled_collection"
-    t.time "scheduled_delivery"
+    t.datetime "fulfillment_date"
+    t.time "fulfillment_time"
     t.time "pickup_time"
     t.time "dropoff_time"
     t.boolean "is_on_time"
     t.string "courier_service"
     t.float "courier_fee"
-    t.string "address"
     t.string "notes"
     t.string "state"
     t.datetime "created_at", null: false
@@ -78,12 +84,9 @@ ActiveRecord::Schema.define(version: 20170720165713) do
   create_table "orders", force: :cascade do |t|
     t.string "number"
     t.date "date"
-    t.float "subtotal"
-    t.float "commission"
-    t.float "subtotal_without_commmission"
+    t.float "total"
     t.float "tax"
     t.float "delivery_fee"
-    t.float "service_charge"
     t.float "revenue"
     t.float "promotions"
     t.datetime "created_at", null: false
@@ -105,6 +108,14 @@ ActiveRecord::Schema.define(version: 20170720165713) do
     t.index ["address_id"], name: "index_recipients_on_address_id"
     t.index ["first_name"], name: "index_recipients_on_first_name"
     t.index ["last_name"], name: "index_recipients_on_last_name"
+  end
+
+  create_table "states", force: :cascade do |t|
+    t.string "name"
+    t.string "abbr"
+    t.datetime "updated_at"
+    t.integer "country_id"
+    t.index ["country_id"], name: "index_states_on_country_id"
   end
 
   create_table "users", force: :cascade do |t|

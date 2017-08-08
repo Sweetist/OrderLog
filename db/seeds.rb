@@ -5,8 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-User.create({
-  email: 'matthughes.tech@gmail.com',
-  password: 'asdfasdfasdf',
-  password_confirmation: 'asdfasdfasdf'
-})
+
+YAML.load_file("db/statedata.yml").each do |state|
+	state[1]["records"].each do |record|
+		ar = {}
+		state[1]["columns"].each_with_index do |col, ind|
+			ar[col] = record[ind]
+		end
+		s = State.create!(ar)
+		s.save
+	end
+end
+
+YAML.load_file("db/countrydata.yml").each do |country|
+	country[1]["records"].each do |record|
+		ar = {}
+		country[1]["columns"].each_with_index do |col, ind|
+			ar[col] = record[ind]
+		end
+		s = Country.create!(ar)
+		s.save
+	end
+end

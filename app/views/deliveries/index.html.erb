@@ -10,3 +10,46 @@ Embedded Form </button>
 <%= render 'layouts/data_form', table: @table, headers: @headers[0], datum: @datum, form_display: "hidden-form"%>
 </div>
 <%= render 'layouts/dynamic_data_table', data: @data, headers: @headers %>
+
+<script>
+var STATUS_CODES = {
+	scheduled_on_time: "#FFFFFF",
+	scheduled_late: "#FFCC88",
+	delivered_on_time: "#AAFFAA",
+	delivered_late: "#FFAAAA"
+}
+var counter = 0;
+<% @data.each do |delivery| %>
+if (<%=!delivery[:fulfillment_time].nil? && !delivery[:fulfillment_date].nil?%>){
+
+	var status = STATUS_CODES.scheduled_on_time;
+
+	if (<%=!delivery[:dropoff_time].nil?%>){
+		//completed
+		status = STATUS_CODES.delivered_on_time;
+	}
+	else{
+		//not completed
+		var deliveryDate = new Date("<%= delivery[:fulfillment_date] %>");
+		var deliveryTime = new Date("<%= delivery[:fulfillment_time] %>");
+		var now = new Date();
+
+		if (deliveryDate < now){
+			status = STATUS_CODES.scheduled_late;
+		}
+		if (now.getHours() > deliveryTime.getHours()){
+			status = STATUS_CODES.scheduled_late;
+		}
+		else if (now.getMinutes() > deliveryTime.getMinutes()){
+			status = STATUS_CODES.scheduled_late;
+		}
+		else{
+			status = STATUS_CODES.scheduled_late;
+		}
+	}
+	console.log(status);
+	console.log(document.getElementById("main-table").getElementsByTagName("tbody")[0].getElementsByTagName("tr")[counter].style.backgroundColor = status)
+}
+counter++;
+<% end %>
+</script>

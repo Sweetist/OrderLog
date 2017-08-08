@@ -1,0 +1,17 @@
+<title>Orders</title>
+<%= render 'layouts/data_form', table: @table, headers: @headers[0], datum: @datum, form_display: nil%>
+<% @datum.line_items.each do |item| %>
+
+<div class="card">
+  <div class="card-block">
+    <blockquote class="card-blockquote">
+		<% item.attributes.each do |key, val| %>
+		<%= key %> : <%= val %>
+		<br>
+		<% end %>
+		<%= link_to "view", edit_line_item_path(item.id) %> | 
+		<%= link_to "delete", line_item_path(item.id), method: :delete %>
+    </blockquote>
+  </div>
+</div>
+<% end %>

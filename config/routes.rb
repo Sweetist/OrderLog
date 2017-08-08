@@ -22,27 +22,6 @@ Rails.application.routes.draw do
 
   post 'deliveries/transition/:id', to: 'deliveries#transition'
 
-  get 'orders', to: 'orders#index'
-  delete 'orders', to: 'orders#destroy'
-  get 'orders/edit', to: 'orders#edit'
-
-  get 'bakeries', to: 'bakeries#index'
-  delete 'bakeries', to: 'bakeries#destroy'
-  get 'bakeries/edit', to: 'bakeries#edit'
-
-  get 'recipients', to: 'recipients#index'
-  delete 'recipients', to: 'recipients#destroy'
-  get 'recipients/edit', to: 'recipients#edit'
-  
-
-  get 'line_items', to: 'line_items#index'
-  delete 'line_items', to: 'line_items#destroy'
-  get 'line_items/edit', to: 'line_items#edit'
-
-  #
-
-  get 'test/:id', to: 'state_tests#show'
-  get 'test/transition/:id', to: 'state_tests#transition'
 
   #get 'unified', to: 'unified#index'
 

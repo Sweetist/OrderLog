@@ -18,9 +18,15 @@
     <%= link_to val, order_path(val) %>
     <% else %>
       <% if val.is_a?(ActiveSupport::TimeWithZone) %>
-      <span class="time">
-      <%= val %>
-      </span>
+        <% if key.include?('date') %>
+          <span class="date">
+            <%= val %>
+          </span>
+        <% else %>
+          <span class="time">
+            <%= val %>
+          </span>
+        <% end %>
       <% else %>
       <%= val %>
       <% end %>

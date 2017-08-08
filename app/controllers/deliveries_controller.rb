@@ -52,7 +52,7 @@ class DeliveriesController < ApplicationController
   end
 
   def show
-    render 'index'
+    #render 'index'
   end
 
   def transition
@@ -67,8 +67,7 @@ class DeliveriesController < ApplicationController
 
   private
   def load_table
-    @visible = ["id","delivery_number", "number", "date", "bakery_id", "courier_service", "scheduled_collection", "scheduled_delivery", "order_id", "state"]
-    #@visible = Delivery.column_names
+    @visible = ["id","delivery_number", "number", "date", "bakery_id", "courier_service", "scheduled_collection", "fulfillment_date", "fulfillment_time", "order_id", "state"]
     @readonly=["pickup_time", "dropoff_time", "is_on_time", "state"]
 
     @transitions = {

@@ -15,9 +15,12 @@ class Delivery < ApplicationRecord
 
 		after_transition [:out_for_delivery, :issue_resolved] => :delivered do |delivery, transition|
 			delivery.dropoff_time = Time.now
-			if !delivery.scheduled_delivery.nil?
-				delivery.is_on_time = Time.now < delivery.scheduled_delivery 
+			
+			if !delivery.fulfillment_date.nil? && !delivery.fulfillment_time.nil?
+				delivery.is_on_time = delivery.dropoff_time <= delivery.fulfillment_date && delivery.dropoff_time.to_s <= delivery.fulfillment_time.to_s
+				#delivery.is_on_time = Time.now < delivery.scheduled_delivery 
 			end 
+			
 			delivery.notify_sweetist
 		end
 

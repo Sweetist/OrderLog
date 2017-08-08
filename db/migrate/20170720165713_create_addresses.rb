@@ -11,18 +11,15 @@ class CreateAddresses < ActiveRecord::Migration[5.1]
 			t.string   "state_name",            limit: 255
 			t.string   "alternative_phone",     limit: 255
 			t.string   "company",               limit: 255
-			t.integer  "state_id"
-			t.integer  "country_id"
 			t.datetime "created_at"
 			t.datetime "updated_at"
-			t.integer  "user_id"
-			t.datetime "deleted_at"
 			t.text     "delivery_instructions"
 			t.timestamps
 		end
-		add_reference :addresses, :bakery, foreign_key: true
-		add_reference :addresses, :recipient, foreign_key: true
+		#add_reference :addresses, :bakery, foreign_key: true
+		#add_reference :addresses, :recipient, foreign_key: true
 		add_reference :bakeries, :address, foreign_key: true
 		add_reference :recipients, :address, foreign_key: true
+		add_reference :addresses, :user, foreign_key: true
 	end
 end

@@ -27,7 +27,7 @@
 </div>
 </div>
 
-<table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped" id="main-table">
   <thead>
     <tr>
       <th></th>
@@ -63,7 +63,7 @@
 
       <td>
         <% if controller_name=="deliveries" && !datum.order.nil? && !datum.order.recipient.nil? && !datum.order.recipient.address.nil? %>
-        <%= datum.order.recipient.address.toString %>        
+          <%= datum.order.recipient.address.toString %>        
         <% end %>
       </td>
 

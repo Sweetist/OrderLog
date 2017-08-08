@@ -1,6 +1,6 @@
 class Recipient < ApplicationRecord
 
   has_many :orders, dependent: :nullify
-  has_one :address, dependent: :nullify
+  belongs_to :address, optional: true
 
 end

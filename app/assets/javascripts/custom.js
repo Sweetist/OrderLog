@@ -30,7 +30,7 @@ var self_toggle_column = function self_toggle_column(){
     hide_column($(this));
 };
 
-var toggle_column = function toggle_column(element){
+var hide_column = function hide_column(element){
     var $header = $("#"+element.attr('data-value'));
     var colInd = $header.parent().children().index($header);
     //nth child is apparently 1-indexed
@@ -63,6 +63,9 @@ var time_to_local = function time_to_local(){
     $(".time").each(function(){
         $(this).text(new Date($(this).text()).toTimeString());
     });
+    $(".date").each(function(){
+        $(this).text(new Date($(this).text()).toDateString());
+    });
 }
 
 var load_dropdown = function load_dropdown(){   
@@ -74,8 +77,9 @@ var load_dropdown = function load_dropdown(){
         });     
         return false;
     });
+
     $(".dropdown-menu a :not(input:checkbox:checked)").each(function(){
-        toggle_column($(this).parent());
+        hide_column($(this).parent());
     });
 }
 
