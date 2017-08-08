@@ -16,8 +16,8 @@ class CreateStatesAndCountries < ActiveRecord::Migration[5.1]
       t.datetime "updated_at"
   	end
 		
-	  add_reference :addresses, :state, foreign_key: true
-	  add_reference :addresses, :country, foreign_key: true
+	  #add_reference :addresses, :state, foreign_key: true
+	  #add_reference :addresses, :country, foreign_key: true
 	  add_reference :states, :country, foreign_key: true
   end
 end
