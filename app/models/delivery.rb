@@ -21,11 +21,11 @@ class Delivery < ApplicationRecord
 				#delivery.is_on_time = Time.now < delivery.scheduled_delivery 
 			end 
 			
-			delivery.notify_sweetist
+			#delivery.notify_sweetist
 		end
 
 		after_transition [:en_route_to_pickup, :issue_resolved] => :out_for_delivery do |delivery, transition|
-			delivery.notify_sweetist
+			#delivery.notify_sweetist
 		end
 
 		event :assign do
