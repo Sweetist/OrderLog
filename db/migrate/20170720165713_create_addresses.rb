@@ -20,6 +20,6 @@ class CreateAddresses < ActiveRecord::Migration[5.1]
 		#add_reference :addresses, :recipient, foreign_key: true
 		add_reference :bakeries, :address, foreign_key: true
 		add_reference :recipients, :address, foreign_key: true
-		add_reference :addresses, :user, foreign_key: true
+		#add_reference :addresses, :user, foreign_key: true
 	end
 end

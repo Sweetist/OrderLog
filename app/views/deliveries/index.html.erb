@@ -37,15 +37,6 @@ if (<%=!delivery[:fulfillment_time].nil? && !delivery[:fulfillment_date].nil?%>)
 		if (deliveryDate < now){
 			status = STATUS_CODES.scheduled_late;
 		}
-		if (now.getHours() > deliveryTime.getHours()){
-			status = STATUS_CODES.scheduled_late;
-		}
-		else if (now.getMinutes() > deliveryTime.getMinutes()){
-			status = STATUS_CODES.scheduled_late;
-		}
-		else{
-			status = STATUS_CODES.scheduled_late;
-		}
 	}
 	console.log(status);
 	console.log(document.getElementById("main-table").getElementsByTagName("tbody")[0].getElementsByTagName("tr")[counter].style.backgroundColor = status)

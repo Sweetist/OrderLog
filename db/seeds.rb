@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+if false
 YAML.load_file("db/statedata.yml").each do |state|
 	state[1]["records"].each do |record|
 		ar = {}
@@ -27,3 +28,4 @@ YAML.load_file("db/countrydata.yml").each do |country|
 		s.save
 	end
 end
+else
