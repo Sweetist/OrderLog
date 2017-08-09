@@ -16,8 +16,8 @@ class CreateAddresses < ActiveRecord::Migration[5.1]
 			t.text     "delivery_instructions"
 			t.timestamps
 		end
-		#add_reference :addresses, :bakery, foreign_key: true
-		#add_reference :addresses, :recipient, foreign_key: true
+		add_reference :addresses, :bakery, foreign_key: true
+		add_reference :addresses, :recipient, foreign_key: true
 		add_reference :bakeries, :address, foreign_key: true
 		add_reference :recipients, :address, foreign_key: true
 		#add_reference :addresses, :user, foreign_key: true

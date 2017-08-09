@@ -5,27 +5,25 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'csv'  
 
-if false
-YAML.load_file("db/statedata.yml").each do |state|
-	state[1]["records"].each do |record|
-		ar = {}
-		state[1]["columns"].each_with_index do |col, ind|
-			ar[col] = record[ind]
-		end
-		s = State.create!(ar)
-		s.save
+def arr_to_hash(model, arr)
+	new_hash = {}
+	model.column_names.each_with_index do |col, ind|
+		new_hash[col] = arr[ind]
 	end
+	new_hash
+	puts new_hash
 end
 
-YAML.load_file("db/countrydata.yml").each do |country|
-	country[1]["records"].each do |record|
-		ar = {}
-		country[1]["columns"].each_with_index do |col, ind|
-			ar[col] = record[ind]
-		end
-		s = Country.create!(ar)
-		s.save
-	end
+csv_text = File.read('state.csv')
+csv = CSV.parse(csv_text, :headers => false)
+csv.each do |row|
+	State.create!(arr_to_hash(State, row))
 end
-else
+
+csv_text = File.read('country.csv')
+csv = CSV.parse(csv_text, :headers => false)
+csv.each do |row|
+	State.create!(arr_to_hash(Country, row))
+end

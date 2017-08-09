@@ -26,12 +26,6 @@ ActiveRecord::Schema.define(version: 20170808152627) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "delivery_instructions"
-    t.integer "user_id"
-    t.integer "state_id"
-    t.integer "country_id"
-    t.index ["country_id"], name: "index_addresses_on_country_id"
-    t.index ["state_id"], name: "index_addresses_on_state_id"
-    t.index ["user_id"], name: "index_addresses_on_user_id"
   end
 
   create_table "bakeries", force: :cascade do |t|
