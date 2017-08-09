@@ -38,8 +38,7 @@ if (<%=!delivery[:fulfillment_time].nil? && !delivery[:fulfillment_date].nil?%>)
 			status = STATUS_CODES.scheduled_late;
 		}
 	}
-	console.log(status);
-	console.log(document.getElementById("main-table").getElementsByTagName("tbody")[0].getElementsByTagName("tr")[counter].style.backgroundColor = status)
+	document.getElementById("main-table").getElementsByTagName("tbody")[0].getElementsByTagName("tr")[counter].style.backgroundColor = status;
 }
 counter++;
 <% end %>

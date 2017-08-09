@@ -28,28 +28,12 @@ module Api
 
     def transition
       transition = params[:transition]
-      case transition
-      when "assign"
-        if !@datum.assign
-          render json: { error: @datum.errors.full_messages }
-        end
-      when "begin_delivery"
-        @datum.begin_delivery
-      when "pickup_order"
-        @datum.pickup_order
-      when "deliver" 
-        @datum.deliver
-      when "request_feedback"
-        @datum.request_feedback
-      when "receive_feedback"
-        @datum.receive_feedback
-      when "report_issue"
-        @datum.report_issue
-      when "resolve_issue" 
-        @datum.resolve_issue
+      if @datum.send(transition)
+        flash[:success] = 'Delivery state transitioned'
+      else
+        flash[:error] = @datum.errors.full_messages
       end
-      render json: { memory: @datum, db: Delivery.find_by(id: params[:id]) }
-      #render json: { message: "successful transition" }
+      render json: { message: "successful transition" }
     end
 
     def show
